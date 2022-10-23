@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -17,6 +18,10 @@ public class FeedService {
 
     public void insertFeed(Feed feed){
         feedRepository.insert(feed);
+    }
+
+    public List<Feed> selectALlFeed(){
+        return feedRepository.selectByMap(new HashMap<>());
     }
 
     public List<Feed> selectFeedByRange(String column, float l, float r){

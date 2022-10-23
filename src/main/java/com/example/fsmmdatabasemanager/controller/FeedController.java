@@ -19,11 +19,12 @@ public class FeedController {
     FeedService feedService;
 
     @ResponseBody
-    @GetMapping("/selectbyrange")
-    public ModelAndView selectFeedByRange(String column, float l, float r){
+    @GetMapping("/")
+    public ModelAndView showFeed(String column, float l, float r){
         List<Feed> list = feedService.selectFeedByRange(column, l, r);
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("Manage");
         modelAndView.addObject("byrange", list);
+        modelAndView.addObject("feed_list", feedService.selectALlFeed());
         return modelAndView;
     }
 
