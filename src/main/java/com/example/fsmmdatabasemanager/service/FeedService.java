@@ -35,8 +35,8 @@ public class FeedService {
         feedRepository.updateById(feed);
     }
 
-    public void delectFeed(Feed feed){
-        feedRepository.deleteById(feed);
+    public void delectFeed(int feedId){
+        feedRepository.deleteById(feedId);
     }
 
 }

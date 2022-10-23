@@ -2,306 +2,233 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME</title>
-    <!-- <link rel="shortcut icon" type="image/x-icon" href="../static/assets/images/icon-img/房子 (1).png"> -->
+    <title>Title</title>
     <link rel="stylesheet" href="/static/css/adminLogin/login.css">
     <link rel="stylesheet" href="/static/css/adminLogin/register.css">
-<!--    <link rel="stylesheet" href="/static/css/adminLogin/login.css">-->
     <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="stylesheet" href="/static/css/slide.css">
-
 </head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  a,
+  img {
+    border: 0;
+  }
+
+  body {
+    font: 12px/180% Arial, Helvetica, sans-serif;
+    background: #ddd;
+  }
+
+  /* roundabout */
+  .roundabout-holder {
+    width: 850px;
+    height: 496px;
+    margin: 0 auto;
+  }
+
+  .roundabout-moveable-item {
+    width: 646px;
+    height: 416px;
+    cursor: pointer;
+    border: 3px solid #ccc;
+    border: 3px solid rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+  }
+
+  .roundabout-moveable-item img {
+    width: 100%;
+  }
+
+  .roundabout-in-focus {
+    border: 3px solid rgba(0, 0, 0, 0.2);
+  }
+</style>
 <body>
-    <div class="wrap">
-        <div class="header">
-            <div class="header-wel">
-                <div id="head-wel-login-before" style="display: block;">
-                    <span id="login-before">欢迎光临本站！</span>
-                    <span><a href="" id="adminBtn">登录</a></span>
-                </div>
-                <div id="head-wel-login-after" style="display: none;">
-                    <span id="login-after" th:text="${session?.current_user_info?.Uname}+'你好,欢迎光临本站！'">欢迎光临本站！</span>
-                    <span><a href="/usercenter/center" id="userBtn">[用户中心]</a></span>
-                </div>
+  <div class="wrap">
+    <div class="header">
+        <div class="header-wel">
+            <div id="head-wel-login-before" style="display: block;">
+                <span id="login-before">欢迎光临本站！</span>
+                <span><a href="" id="adminBtn">登录</a></span>
             </div>
-            <div class="nav">
-                <ul>
-                    <img src="/static/assets/images/logo/2.webp" alt="" class="nav-img">
-                    <li><a href="/index">首页</a></li>
-                    <li><a href="/news/allnews">新闻公告</a></li>
-                    <li><a href="/house/commercialoffice">商业办公</a></li>
-                    <li><a href="/house/commonhouse">普通民宅</a></li>
-                    <li><a href="/house/hotelhouse">酒店公寓</a></li>
-                    <li><a href="/house/allhouse">全部房源</a></li>
-                    <li><a href="/contact/showcontact">留言交流</a></li>
-                </ul>
+            <div id="head-wel-login-after" style="display: none;">
+                <span id="login-after" th:text="${session?.current_user_info?.Uname}+'你好,欢迎光临本站！'">欢迎光临本站！</span>
+                <span><a href="/usercenter/center" id="userBtn">[用户中心]</a></span>
             </div>
-        </div>
-        <div class="search">
-            <img id="search-img" src="/static/assets/images/logo/1.webp" alt="">
-            <input id="searchInput" type="text" onkeypress="if (event.keyCode == 13) showResult();" onkeydown="entersearch(event)" />
-            <button id="searchbtn" onclick="to()"><a >搜索</a></button>
-        </div>
-        <div class="slideshow">
-            <div id="outer">
-                <!-- 放置图片 -->
-                <ul id="imglist">
-                    <li>
-                        <img src="/static/assets/images/slide-imgs/1.jpg" alt="" class="slide-img">
-                    </li>
-                    <li>
-                        <img src="/static/assets/images/slide-imgs/2.jpg" alt="" class="slide-img">
-                    </li>
-                    <li>
-                        <img src="/static/assets/images/slide-imgs/3.jpg" alt="" class="slide-img">
-                    </li>
-                    <li>
-                        <img src="/static/assets/images/slide-imgs/4.jpg" alt="" class="slide-img">
-                    </li>
-                    <li>
-                        <img src="/static/assets/images/slide-imgs/1.jpg" alt="" class="slide-img">
-                    </li>
-                </ul>
-                <!-- 创建导航按钮 -->
-                <div id="slide-navbtn">
-                    <a href="javascript:;" class="slide-a"></a>
-                    <a href="javascript:;" class="slide-a"></a>
-                    <a href="javascript:;" class="slide-a"></a>
-                    <a href="javascript:;" class="slide-a"></a>
-                    <a href="javascript:;" class="slide-a"></a>
-                </div>
-            </div>
-        </div>
-        <div class="main">
-            <div class="main-lelf">
-                <div id="new-head">
-                    <h2>新闻公告</h2>
-                </div>
-                <div id="new-content">
-                    <ul>
-                        <li th:each="news:${LatestNewsList}">
-                            <a th:href="@{/news/shownews(id=${news.NID})}" th:text="'● '+${news.Nheader}">● 新闻一</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="main-right">
-                <div id="right-head">
-                    <h2>最新房源</h2>
-                </div>
-                <div id="right-content">
-                    <ul>
-                        <li th:each="house:${LatestHouseList}">
-                            <a class="alla" th:href="@{/house/housedetail(houseid=${house.HID})}"><img th:src="${house.Hphoto}" alt=""></a>
-                            <a class="alla" th:href="@{/house/housedetail(houseid=${house.HID})}"><p class="line-limit-length" th:text="${house.Hname}">环境很好，阳光充足！1234567890987654321</p></a>
-                            <h2 th:text="'￥'+${house.Hcost}+'/月'">＄7600/月</h2>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="house-type">
-                <div class="house-type-head">
-                    <h2>商务办公</h2>
-                </div>
-                <div class="house-type-content">
-                    <ul>
-                        <li th:each="house:${CommercialOfficeList}">
-                            <a class="alla" th:href="@{/house/housedetail(houseid=${house.HID})}"><img th:src="${house.Hphoto}" alt=""></a>
-                            <a th:href="@{/house/housedetail(houseid=${house.HID})}"><p class="line-limit-length" th:text="${house.Hname}">环境很好，阳光充足！</p></a>
-                            <h2 th:text="'￥'+${house.Hcost}+'/月'">＄7600/月</h2>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="house-type">
-                <div class="house-type-head">
-                    <h2>普通民宅</h2>
-                </div>
-
-                <div class="house-type-content">
-                    <ul>
-                        <li th:each="house:${OrdinaryHouseList}">
-                            <a class="alla" th:href="@{/house/housedetail(houseid=${house.HID})}"><img th:src="${house.Hphoto}" alt=""></a>
-                            <a th:href="@{/house/housedetail(houseid=${house.HID})}"><p class="line-limit-length" th:text="${house.Hname}">环境很好，阳光充足！</p></a>
-                            <h2 th:text="'￥'+${house.Hcost}+'/月'">＄7600/月</h2>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="house-type">
-                <div class="house-type-head">
-                    <h2>酒店公寓</h2>
-                </div>
-                <div class="house-type-content">
-                    <ul>
-                        <li th:each="house:${HotelHouseList}">
-                            <a class="alla" th:href="@{/house/housedetail(houseid=${house.HID})}"><img th:src="${house.Hphoto}" alt=""></a>
-                            <a th:href="@{/house/housedetail(houseid=${house.HID})}"><p class="line-limit-length" th:text="${house.Hname}">环境很好，阳光充足！</p></a>
-                            <h2 th:text="'￥'+${house.Hcost}+'/月'">＄7600/月</h2>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <h2></h2>
-        </div>
+        </div>   
     </div>
-
-    <div id="login" class="login">
-        <div id="login-title" class="login-title">
-            <div class="login-title-item">
-                <div class="active">用户登录</div><div>管理员登录</div>
-            </div>
-            <span><a id="closeBtn" href="javascript:void(0)"><img src="/static/assets/images/icon-img/closeBtn.png"
-                                                                  alt=""></a></span>
-        </div>
-
-        <form id="login-form" action="/loginsubmit" method="post" onsubmit="return loginsave();" style="display: block">
-            <div class="login-input">
-                <label>用户名:</label>
-                <i class="icons-user" id="icons-login"></i>
-                <input type="text" id="inputAccount" name="act" minlength="4" maxlength="40" class="list-input" placeholder="请输入用户名"/><br>
-                <span id="inputAccountEmpty" class="emptyInput" style="display: none">用户名不能为空</span>
-            </div>
-            <div class="login-input eye-div">
-                <label>密码:</label>
-                <i class="icons-password"></i>
-                <input type="password" id="inputPassword" minlength="6" maxlength="18" name="psw" class="list-input eye-input" placeholder="请输入密码"/><br>
-                <img id="eye" class="eye" src="/static/assets/images/icon-img/eye-show.png" alt="">
-                <span id="inputPasswordEmpty" class="emptyInput" style="display: none">密码不能为空</span>
-            </div>
-            <input type="hidden" id="loginRole" name="role" value="user"/>
-            <input type="submit" id="loginBtn" value="登录" class="loginSubmit"/>
-            <span><a id="register-btn" href="">点击注册</a></span>
-            <span><a id="forget-btn" href="">忘记密码？</a></span>
-        </form>
+    <div>
+      <ul class="roundabout" id="myroundabout">
+        <li><img src="/static/images/slide/slide1.webp" alt=""></li>
+        <li><img src="/static/images/slide/slide2.jpg" alt=""></li>
+        <li><img src="/static/images/slide/slide3.jpg" alt=""></li>
+        <li><img src="/static/images/slide/slide4.jpg" alt=""></li>
+        <li><img src="/static/images/slide/slide5.jpg" alt=""></li>
+      </ul>
     </div>
+</div>
+<div id="login" class="login">
+  <div id="login-title" class="login-title">
+      <div class="login-title-item">
+          <div class="active">用户登录</div><div>管理员登录</div>
+      </div>
+      <span><a id="closeBtn" href="javascript:void(0)"><img src="/static/assets/images/icon-img/closeBtn.png"
+                                                            alt=""></a></span>
+  </div>
+
+  <form id="login-form" action="/loginsubmit" method="post" onsubmit="return loginsave();" style="display: block">
+      <div class="login-input">
+          <label>用户名:</label>
+          <i class="icons-user" id="icons-login"></i>
+          <input type="text" id="inputAccount" name="act" minlength="4" maxlength="40" class="list-input" placeholder="请输入用户名"/><br>
+          <span id="inputAccountEmpty" class="emptyInput" style="display: none">用户名不能为空</span>
+      </div>
+      <div class="login-input eye-div">
+          <label>密码:</label>
+          <i class="icons-password"></i>
+          <input type="password" id="inputPassword" minlength="6" maxlength="18" name="psw" class="list-input eye-input" placeholder="请输入密码"/><br>
+          <img id="eye" class="eye" src="/static/assets/images/icon-img/eye-show.png" alt="">
+          <span id="inputPasswordEmpty" class="emptyInput" style="display: none">密码不能为空</span>
+      </div>
+      <input type="hidden" id="loginRole" name="role" value="user"/>
+      <input type="submit" id="loginBtn" value="登录" class="loginSubmit"/>
+      <span><a id="register-btn" href="">点击注册</a></span>
+      <span><a id="forget-btn" href="">忘记密码？</a></span>
+  </form>
+</div>
 <!--  注册框 -->
-    <div id="register" class="register">
-        <div id="register-title" class="register-title">
-            <div class="register-title-item">
-                <div>用户注册</div>
-            </div>
-            <span><a id="closeButton" href="javascript:void(0)"><img src="/static/assets/images/icon-img/closeBtn.png"
-                                                                     alt=""></a></span>
-        </div>
-        <form id="register-form" action="Registersubmit" method="post" style="display: block">
-            <div class="register-input">
-                <label>账号名:</label>
-                <i class="icons-email"></i>
-                <input type="text" id="inputAct" name="email" minlength="4" maxlength="40" class="list-input" placeholder="请输入账号名"/><br>
-                <span id="inputEmailEmpty" class="emptyInput" style="display: none">账号不能为空</span>
-            </div>
-            <div class="register-input">
-                <label>昵称:</label>
-                <i class="icons-user" id="icons-register"></i>
-                <input type="text" id="inputNickname" name="act" minlength="4" maxlength="40" class="list-input" placeholder="请输入昵称" /><br>
-                <span id="inputActEmpty" class="emptyInput" style="display: none">名称不能为空</span>
-            </div>
-            <div class="register-input eye-div">
-                <label>密码:</label>
-                <i class="icons-password"></i>
-                <input type="password" id="inputPsw" minlength="6" maxlength="18" name="pwd" class="list-input eye-input" placeholder="请输入密码" /><br>
+<div id="register" class="register">
+  <div id="register-title" class="register-title">
+      <div class="register-title-item">
+          <div>用户注册</div>
+      </div>
+      <span><a id="closeButton" href="javascript:void(0)"><img src="/static/assets/images/icon-img/closeBtn.png"
+                                                               alt=""></a></span>
+  </div>
+  <form id="register-form" action="Registersubmit" method="post" style="display: block">
+      <div class="register-input">
+          <label>账号名:</label>
+          <i class="icons-email"></i>
+          <input type="text" id="inputAct" name="email" minlength="4" maxlength="40" class="list-input" placeholder="请输入账号名"/><br>
+          <span id="inputEmailEmpty" class="emptyInput" style="display: none">账号不能为空</span>
+      </div>
+      <div class="register-input">
+          <label>昵称:</label>
+          <i class="icons-user" id="icons-register"></i>
+          <input type="text" id="inputNickname" name="act" minlength="4" maxlength="40" class="list-input" placeholder="请输入昵称" /><br>
+          <span id="inputActEmpty" class="emptyInput" style="display: none">名称不能为空</span>
+      </div>
+      <div class="register-input eye-div">
+          <label>密码:</label>
+          <i class="icons-password"></i>
+          <input type="password" id="inputPsw" minlength="6" maxlength="18" name="pwd" class="list-input eye-input" placeholder="请输入密码" /><br>
 <!--                <img id="registereye" class="eye" src="/static/assets/images/icon-img/eye-show.png" alt="">-->
-                <span id="inputPswEmpty" class="emptyInput" style="display: none">密码不能为空</span>
-            </div>
-            <input type="hidden" id="registerRole" name="role" value="user"/>
-            <input type="submit" id="registerBtn" value="注册" class="registerSubmit"/>
-            <span><a id="login-btn" href="">返回登录</a></span>
-        </form>
-    </div>
-    <!-- 遮盖层 -->
-    <div id="bg" class="bg"></div>
-    <div id="ScrollHeadersPlaceholder"></div>
+          <span id="inputPswEmpty" class="emptyInput" style="display: none">密码不能为空</span>
+      </div>
+      <input type="hidden" id="registerRole" name="role" value="user"/>
+      <input type="submit" id="registerBtn" value="注册" class="registerSubmit"/>
+      <span><a id="login-btn" href="">返回登录</a></span>
+  </form>
+</div>
+<!-- 遮盖层 -->
+<div id="bg" class="bg"></div>
+<div id="ScrollHeadersPlaceholder"></div>
+<script type="text/javascript" src="/static/js/slide/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/static/js/slide/jquery.roundabout.js"></script>
+<script type="text/javascript" src="/static/js/slide/jquery.roundabout-shapes.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#myroundabout').roundabout({
+      autoplay: true, autoplayDuration: 3000, autoplayPauseOnHover: true, shape: 'figure8', minOpacity: 1
+    });
+  });
+</script>
 <!-- jQuery JS -->
-<script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>
+<!-- <script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script> -->
 <script src="/static/js/jquery.validate.js"></script>
-
 <script src="/static/js/jquery-form.js"></script>
-<!--<script src="/static/assets/js/vendor/jquery-3.3.1.min.js"></script>-->
-<!--<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>-->
 <!-- login.js  -->
 <script type="text/javascript" src="/static/js/login.js"></script>
 <!-- register.js -->
 <script type="text/javascript" src="/static/js/register.js"></script>
-<!-- slide.js -->
-<script type="text/javascript" src="/static/js/slide.js"></script>
-
 <script>
-    var loginTitleItem = document.getElementsByClassName("login-title-item");
-    var loginIt = loginTitleItem[0].getElementsByTagName("div");
+  var loginTitleItem = document.getElementsByClassName("login-title-item");
+  var loginIt = loginTitleItem[0].getElementsByTagName("div");
 
-    for(let i=0;i<loginIt.length;i++){
-        loginIt[i].onclick = function(){
-            // alert('成功啦');
-            for(let j=0;j<loginIt.length;j++){
-                loginIt[j].className = '';
-            }
-            this.className = "active";
-            loginIt[i].index = i;
-            if (loginIt[i].innerText === "用户登录") {
-                $("#loginRole").val("user");
-                $('#icons-login').attr('class','icons-user');
-                $('#icons-register').attr('class','icons-user');
-            } else {
-                $("#loginRole").val("admin");
-                $('#icons-login').attr('class','icons-admin');
-                $('#icons-register').attr('class','icons-admin');
-            }
-            $("#inputAccountEmpty").css("display", "none");
-            $("#inputPasswordEmpty").css("display", "none");
-        }
-    }
-    var registerTitleItem = document.getElementsByClassName("register-title-item");
-    var registerIt = registerTitleItem[0].getElementsByTagName("div");
+  for(let i=0;i<loginIt.length;i++){
+      loginIt[i].onclick = function(){
+          // alert('成功啦');
+          for(let j=0;j<loginIt.length;j++){
+              loginIt[j].className = '';
+          }
+          this.className = "active";
+          loginIt[i].index = i;
+          if (loginIt[i].innerText === "用户登录") {
+              $("#loginRole").val("user");
+              $('#icons-login').attr('class','icons-user');
+              $('#icons-register').attr('class','icons-user');
+          } else {
+              $("#loginRole").val("admin");
+              $('#icons-login').attr('class','icons-admin');
+              $('#icons-register').attr('class','icons-admin');
+          }
+          $("#inputAccountEmpty").css("display", "none");
+          $("#inputPasswordEmpty").css("display", "none");
+      }
+  }
+  var registerTitleItem = document.getElementsByClassName("register-title-item");
+  var registerIt = registerTitleItem[0].getElementsByTagName("div");
 
-    for( let i=0;i<registerIt.length;i++){
-        registerIt[i].onclick = function(){
-            for(let j=0;j<registerIt.length;j++){
-                registerIt[j].className = '';
-            }
-            this.className = "active";
-            registerIt[i].index = i;
-            if (registerIt[i].innerText === "用户注册") {
-                $("#registerRole").val("user");
-                $('#icons-login').attr('class','icons-user');
-                $('#icons-register').attr('class','icons-user');
-            } else {
-                $("#registerRole").val("admin");
-                $('#icons-login').attr('class','icons-admin');
-                $('#icons-register').attr('class','icons-admin');
-            }
-            $("#inputEmailEmpty").css("display", "none");
-            $("#inputActEmpty").css("display", "none");
-            $("#inputPswEmpty").css("display", "none");
-        }
-    }
+  for( let i=0;i<registerIt.length;i++){
+      registerIt[i].onclick = function(){
+          for(let j=0;j<registerIt.length;j++){
+              registerIt[j].className = '';
+          }
+          this.className = "active";
+          registerIt[i].index = i;
+          if (registerIt[i].innerText === "用户注册") {
+              $("#registerRole").val("user");
+              $('#icons-login').attr('class','icons-user');
+              $('#icons-register').attr('class','icons-user');
+          } else {
+              $("#registerRole").val("admin");
+              $('#icons-login').attr('class','icons-admin');
+              $('#icons-register').attr('class','icons-admin');
+          }
+          $("#inputEmailEmpty").css("display", "none");
+          $("#inputActEmpty").css("display", "none");
+          $("#inputPswEmpty").css("display", "none");
+      }
+  }
 </script>
 </body>
 
 <script type="text/javascript">
-    function jumpPage(searchValue) {
-        window.location.href="house/searchhouse?keyword="+searchValue;
-    }
+  function jumpPage(searchValue) {
+      window.location.href="house/searchhouse?keyword="+searchValue;
+  }
 
-    // 按Enter键,执行事件
-    function entersearch(event){
-        if (event.keyCode == 13)
-        {
-            to();
-        }
-    }
-    // 按钮点击触发函数
-    function to(){
-        var searchValue = document.getElementById("searchInput").value;
-        jumpPage(searchValue);
+  // 按Enter键,执行事件
+  function entersearch(event){
+      if (event.keyCode == 13)
+      {
+          to();
+      }
+  }
+  // 按钮点击触发函数
+  function to(){
+      var searchValue = document.getElementById("searchInput").value;
+      jumpPage(searchValue);
 
-    }
+  }
 </script>
 
+</body>
 </html>
