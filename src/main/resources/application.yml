@@ -1,0 +1,33 @@
+server:
+  port: 8083
+  servlet:
+    #    context-path: /
+    #以下三行配置信息，修改jsp文件不用重启
+    jsp:
+      init-parameters:
+        development: true
+spring:
+  datasource: #简单测试,这里不设数据库连接池
+    name: rent  #数据库名
+    url: jdbc:mysql://localhost:3306/fsmm?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&
+    username: admin  #用户名
+    password: mysql_151536  #密码
+    #    driver-class-name: com.mysql.jdbc.Driver #数据库连接驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver #数据库连接驱动(版本8以上，兼容低版本)
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/ #jsp文件夹映射路径
+      suffix: .jsp #省略文件后最
+    static-path-pattern: /static/**
+  jpa:
+    open-in-view: false
+#  thymeleaf:
+#    cache: false
+#    enabled: false
+#mybatis映射路径
+mybatis:
+  mapper-locations: classpath:mybatis/*/*.xml,mybatis/**/*.xml
+  # 打印sql语句
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
