@@ -1,0 +1,8 @@
+.userTable-border {
+    width: 800px;
+    border: 1px solid red;
+    background-color: red;
+}
+.col-sm-6-after {
+    width: 50%;
+}

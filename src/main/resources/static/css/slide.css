@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/* 轮播图外容器 */
+#outer {
+    width: 1000px;
+    height: 380px;
+    margin: 0 auto; /*上下左右*/
+    /* border: 2px solid red; */
+    position: relative;
+    overflow: hidden;
+}
+#imglist li {
+    padding: 0 2px;
+}
+#imglist li img{
+    padding-top: 8px;
+    width: 1000px;
+    height: 380px;
+}
+/* 去除自带的标识 */
+#imglist {
+    list-style: none;
+    display: flex;
+    position: absolute;
+    /* 设置偏移量 */
+    left: -506px;
+}
+/* 导航按钮 */
+#slide-navbtn {
+    position: absolute;
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    bottom: 10px;
+}
+#slide-navbtn a {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: aqua;
+    text-decoration: none;
+    margin: 0 5px;
+    /* 透明度 */
+    opacity: 0.5;
+}
+/* 鼠标移入效果 */
+#slide-navbtn a:hover {
+    background-color: black;
+}

@@ -1,0 +1,229 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* 弹出登陆框按钮 */
+#adminBtn {
+    text-align: center;
+    /* height: 30px; */
+    color: white;
+    padding-top: 5px;
+}
+
+#adminBtn a {
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+}
+
+/* 登陆框主体 */
+ .login {
+    width: 512px;
+    height: 302px;
+    z-index: 9999;
+    display: none;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 20%;
+    border: 1px solid gray;
+    border-radius: 12px;
+}
+
+.login form {
+    display: none;
+}
+
+#login-form span{
+   font-size: 10px;
+} 
+
+/* 登陆框标题 */
+.login-title {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 10px auto;
+    font-size: 10px;
+    font-weight: 600;
+    /* background: #31c27c; */
+}
+.login-title-item {
+    width: 510px;
+    height: 40px;
+    background: white;
+    border-bottom: 2px solid #f0f8ff;
+}
+.login-title-item div {
+    width: 255px;
+    height: 40px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    /* color: #000; */
+}
+.login-title span img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.active{
+    color: rgb(251, 242, 242);
+    background-color: #31c27c;
+}
+/* 
+.login-title-item div:hover{
+    color: #31c27c;
+} */
+
+
+
+/* 登陆表单 */
+.login-input {
+    margin-top: 20px;
+    height: 50px;
+}
+
+.login-input label {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    width: 90px;
+    padding-left: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-input input.list-input {
+    height: 35px;
+    line-height: 35px;
+    width: 320px;
+    text-indent: 5px;
+    border: 1px solid rgb(30,30,30);
+    border-radius: 6px;
+    color: #3D4059;
+    font-size: 12px;
+}
+
+/* 登陆框登陆按钮 */
+.loginSubmit {
+    width: 180px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid gray;
+    background-color: grey;
+    margin-left: 155px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color:white;
+}
+
+/*注册链接*/
+#register-btn{
+    color: #31c27c;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+
+#login-btn{
+    margin-right:20px ;
+    color: #31c27c;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+/* 遮盖层 */
+.bg {
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    position: fixed;
+    opacity: 0.5;
+    -webkit-opacity: 0.5;
+    -moz-opacity: 0.5;
+    display: none;
+}
+/*小图标*/
+input {
+    padding-left: 22px;
+}
+
+.icons-user {
+    position: absolute;
+    z-index: 5;
+    background-size: 22px 20px;
+    padding: 14px;
+    background-position: 2px 7px;
+    background-repeat: no-repeat;
+    background-image: url(/static/assets/images/icon-img/user.png);
+}
+.icons-admin {
+    position: absolute;
+    z-index: 5;
+    background-size: 22px 22px;
+    padding: 14px;
+    background-position: 2px 7px;
+    background-repeat: no-repeat;
+    background-image: url(/static/assets/images/icon-img/admin.png);
+}
+.icons-password {
+    position: absolute;
+    z-index: 5;
+    background-size: 22px 20px;
+    padding: 14px;
+    background-position: 2px 7px;
+    background-repeat: no-repeat;
+    background-image: url(/static/assets/images/icon-img/password.png);
+}
+.icons-email {
+    position: absolute;
+    z-index: 5;
+    background-size: 20px 20px;
+    padding: 14px;
+    background-position: 4px 7px;
+    background-repeat: no-repeat;
+    background-image: url(/static/assets/images/icon-img/email.png);
+}
+/*空值*/
+.emptyInput {
+    margin: 0px 0px 0px 93px;
+    color: #F94F17;
+}
+/*密码隐藏*/
+#eye {
+    width:23px ;
+    height: 25px;
+    right: 80px;
+    bottom: 19px;
+    position: absolute;
+}
+.forget-eye{
+    width:23px ;
+    height: 25px;
+    right: 104px;
+    bottom: 9px;
+    position: absolute;
+} 
+/* 开始乱码 */
+.eye-div {
+    position: relative;
+    /*background-color: #0f6674;*/
+    /*border: 2px solid #eee;*/
+}
+.eye-input {
+    height:35px;
+    background: transparent;
+    width: 320px;
+    border: none;
+    outline: none;
+} 
