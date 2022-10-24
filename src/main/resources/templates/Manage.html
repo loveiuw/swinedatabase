@@ -41,8 +41,7 @@
         <div class="nav">
             <ul>
                 <img src="/static/assets/images/logo/4.png" alt="" class="nav-img">
-                <!-- <li><a href="/templates/index.html">房屋租赁系统</a></li> -->
-                <li><h2>房屋租赁系统</h2></li>
+                <li><h2>肠道微生物数据库</h2></li>
                 <li id="clock">
                     <script type="text/javascript">
                         var clock = new Clock();
@@ -174,7 +173,7 @@
                                             <td th:text="${feed?.phase3FeedPercentage}">phase3FeedPercentage</td>
                                             <td th:text="${feed?.dayOfIntake}">dayOfIntake</td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="feed_updateBtn([[${feed?.UID}]],[[${feed?.Uaccount}]],[[${feed?.Uname}]],[[${feed?.Upassword}]],[[${feed?.Usex}]],[[${feed?.Ubirth}]],[[${feed?.Uphone}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                <button th:onclick="feed_updateBtn([[${feed?.tag}]],[[${feed?.time}]],[[${feed?.nurseingFeedPercentage}]],[[${feed?.phase1FeedPercentage}]],[[${feed?.phase2FeedPercentage}]],[[${feed?.phase3FeedPercentage}]],[[${feed?.dayOfIntake}]],)" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>
@@ -207,43 +206,45 @@
                                 <div class="ibox-content">
                                     <form id="feed-addForm" class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">账号：</label>
+                                            <label class="col-sm-3 control-label">tag：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-addfeedIndex" type="text" placeholder="账号" class="form-control">
+                                                <input id="feed-addtag" type="text" placeholder="tag" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">密码：</label>
+                                            <label class="col-sm-3 control-label">time：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-addtag" type="text" placeholder="密码" class="form-control">
+                                                <input id="feed-addtime" type="text" placeholder="time" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">姓名：</label>
+                                            <label class="col-sm-3 control-label">nurseingFeedPercentage：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-addtime" type="text" placeholder="姓名" class="form-control">
+                                                <input id="feed-addnurseingFeedPercentage" type="text" placeholder="nurseingFeedPercentage" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">性别：</label>
+                                            <label class="col-sm-3 control-label">addPhase1：</label>
                                             <div class="col-sm-8">
-                                                <select id="feed-addnurseingFeedPercentage" type="text" class="form-control">
-                                                    <option value="男">男</option>
-                                                    <option value="女">女</option>
-                                                </select>
-                                                <!-- <input id="user-addUsex" type="text" placeholder="性别" class="form-control"> -->
+                                                <input id="feed-addPhase1" type="date" placeholder="addPhase1" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">生日：</label>
+                                            <label class="col-sm-3 control-label">ddPhase2：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-addPhase1" type="date" placeholder="生日" class="form-control">
+                                                <input id="feed-ddPhase2" type="text" placeholder="ddPhase2" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">电话：</label>
+                                            <label class="col-sm-3 control-label">ddPhase3：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-ddPhase2" type="text" placeholder="电话" class="form-control">
+                                                <input id="feed-ddPhase3" type="text" placeholder="ddPhase3" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">dayOfIntake：</label>
+                                            <div class="col-sm-8">
+                                                <input id="feed-dayOfIntake" type="text" placeholder="dayOfIntake" class="form-control">
                                             </div>
                                         </div>
                                         <div>
@@ -259,7 +260,7 @@
             </div>
         </div>
 
-        <!--用户修改弹出框：编号，账号，密码，姓名，性别，生日，电话-->
+        <!--feed修改弹出框-->
         <div id="user-modal-form-update" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -272,49 +273,51 @@
                                 <div class="ibox-content">
                                     <form id="feed-updateForm" class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">编号：</label>
+                                            <label class="col-sm-3 control-label">feedIndex：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-updateId" type="text" placeholder="编号" class="form-control" disabled>
+                                                <input id="feed-updateIndex" type="text" placeholder="feedIndex" class="form-control" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">账号：</label>
+                                            <label class="col-sm-3 control-label">tag：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-updateUaccount" type="text" placeholder="账号" class="form-control">
+                                                <input id="feed-updatetag" type="text" placeholder="tag" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">密码：</label>
+                                            <label class="col-sm-3 control-label">time：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-updateUpassword" type="text" placeholder="密码" class="form-control">
+                                                <input id="feed-updateTime" type="text" placeholder="time" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">姓名：</label>
+                                            <label class="col-sm-3 control-label">nurseingFeedPercentage：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-updateUname" type="text" placeholder="姓名" class="form-control">
+                                                <input id="feed-updateNurseingFeedPercentage" type="text" placeholder="nurseingFeedPercentage" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">性别：</label>
+                                            <label class="col-sm-3 control-label">ddPhase1：</label>
                                             <div class="col-sm-8">
-                                                <select id="feed-updateUsex" type="text" class="form-control">
-                                                    <option value="男">男</option>
-                                                    <option value="女">女</option>
-                                                </select>
-                                                <!-- <input id="feed-updateUsex" type="text" placeholder="性别" class="form-control"> -->
+                                                <input id="feed-updateddPhase1" type="text" placeholder="ddPhase1" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">生日：</label>
+                                            <label class="col-sm-3 control-label">ddPhase2：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-updateUbirth" type="date" placeholder="生日" class="form-control">
+                                                <input id="feed-updateddPhase2" type="text" placeholder="ddPhase2" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">电话：</label>
+                                            <label class="col-sm-3 control-label">ddPhase3：</label>
                                             <div class="col-sm-8">
-                                                <input id="feed-updateUphone" type="text" placeholder="电话" class="form-control">
+                                                <input id="feed-updateddPhase3" type="text" placeholder="ddPhase3" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">dayOfIntake：</label>
+                                            <div class="col-sm-8">
+                                                <input id="feed-updatedayOfIntake" type="text" placeholder="dayOfIntake" class="form-control">
                                             </div>
                                         </div>
                                         <div>
@@ -332,48 +335,48 @@
 
 
 
-        <!--管理员显示栏：编号，账号，密码，姓名，电话-->
-        <div style="" id="adminbox">
+        <!--FeedIngredient显示栏-->
+        <div style="" id="feedIngredientbox">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>管理员管理</h5>
+                                <h5>FeedIngredient Manage</h5>
                                 <div class="ibox-tools">
-                                    <button id="admin-addFeedBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                    <button id="feedIngredient-addFeedBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
                                 </div>
                             </div>
                             <div class="ibox-content">
                                 <div class="input-group">
-                                    <input id="admin-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                                <button id="admin-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                    <input id="FeedIngredient-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="FeedIngredient-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
                                 </div>
-                                <div id="AdminTable" th:fragment="AdminTable">
+                                <div id="FeedIngredientTable" th:fragment="FeedIngredientTable">
                                     <table class="footable table table-stripped toggle-arrow-tiny">
                                         <thead>
                                         <tr>
-                                            <th>编号</th>
-                                            <th>账号</th>
-                                            <th>姓名</th>
-                                            <th>密码</th>
-                                            <th>电话</th>
+                                            <th>Item</th>
+                                            <th>Nursing_feed_ingredient</th>
+                                            <th>Nursing_feed_ingredient</th>
+                                            <th>Nursing_feed_ingredient</th>
+                                            <th>Nursing_feed_ingredient</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="admins: ${admin_list}">
-                                            <td th:text="${admins?.AID}" >管理员ID</td>
-                                            <td th:text="${admins?.Aaccount}">管理员账号</td>
-                                            <td th:text="${admins?.Aname}">管理员姓名</td>
-                                            <td th:text="${admins?.Apassword}">管理员密码</td>
-                                            <td th:text="${admins?.Aphone}">管理员电话</td>
+                                        <tr th:each="feedIngredients: ${feedIngredient_list}">
+                                            <td th:text="${feedIngredients?.item}">item</td>
+                                            <td th:text="${feedIngredients?.Nursing_feed_ingredient}" >Nursing_feed_ingredient</td>
+                                            <td th:text="${feedIngredients?.phase1FeedIngredient}">phase1FeedIngredient</td>
+                                            <td th:text="${feedIngredients?.phase2FeedIngredient}">phase2FeedIngredient</td>
+                                            <td th:text="${feedIngredients?.phase3FeedIngredient}">phase3FeedIngredient</td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="admin_updateBtn([[${admins?.AID}]],[[${admins?.Aaccount}]],[[${admins?.Aname}]],[[${admins?.Apassword}]],[[${admins?.Aphone}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                <button th:onclick="feedIngredient_updateBtn([[${feedIngredients?.item}]],[[${feedIngredients?.Nursing_feed_ingredient}]],[[${feedIngredients?.phase1FeedIngredient}]],[[${feedIngredients?.phase2FeedIngredient}]],[[${feedIngredients?.phase3FeedIngredient}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="|admin_deleteBtn(${admins?.AID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                <button th:onclick="|feedIngredient_deleteBtn(${feedIngredients?.item})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-trash"></i> 删除
                                                 </button>
                                             </td>
@@ -388,8 +391,8 @@
             </div>
         </div>
 
-        <!--管理员增加弹出框：账号，密码，姓名，电话-->
-        <div id="admin-modal-form-add" class="modal fade" aria-hidden="true">
+        <!--FeedIngredient增加弹出框-->
+        <div id="feedIngredient-modal-form-add" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -399,33 +402,33 @@
                                     <h5>添加新的管理员</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <form id="admin-addForm" class="form-horizontal">
+                                    <form id="feedIngredient-addForm" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">账号：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-addAaccount" type="text" placeholder="账号" class="form-control">
+                                                <input id="feedIngredient-addAaccount" type="text" placeholder="账号" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">密码：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-addApassword" type="text" placeholder="密码" class="form-control">
+                                                <input id="feedIngredient-addApassword" type="text" placeholder="密码" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">姓名：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-addAname" type="text" placeholder="姓名" class="form-control">
+                                                <input id="feedIngredient-addAname" type="text" placeholder="姓名" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">电话：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-addAphone" type="text" placeholder="电话" class="form-control">
+                                                <input id="feedIngredient-addAphone" type="text" placeholder="电话" class="form-control">
                                             </div>
                                         </div>
                                         <div>
-                                            <button id="admin-addSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
+                                            <button id="feedIngredient-addSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
                                             </button>
                                         </div>
                                     </form>
@@ -438,7 +441,7 @@
         </div>
 
         <!--管理员修改弹出框：编号，账号，密码，姓名，电话-->
-        <div id="admin-modal-form-update" class="modal fade" aria-hidden="true">
+        <div id="feedIngredient-modal-form-update" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -448,39 +451,39 @@
                                     <h5>修改管理员信息</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <form id="admin-updateForm" class="form-horizontal">
+                                    <form id="feedIngredient-updateForm" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">编号：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-updateId" type="text" placeholder="编号" class="form-control" disabled>
+                                                <input id="feedIngredient-updateId" type="text" placeholder="编号" class="form-control" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">账号：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-updateAaccount" type="text" placeholder="账号" class="form-control">
+                                                <input id="feedIngredient-updateAaccount" type="text" placeholder="账号" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">密码：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-updateApassword" type="text" placeholder="密码" class="form-control">
+                                                <input id="feedIngredient-updateApassword" type="text" placeholder="密码" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">姓名：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-updateAname" type="text" placeholder="姓名" class="form-control">
+                                                <input id="feedIngredient-updateAname" type="text" placeholder="姓名" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">电话：</label>
                                             <div class="col-sm-8">
-                                                <input id="admin-updateAphone" type="text" placeholder="电话" class="form-control">
+                                                <input id="feedIngredient-updateAphone" type="text" placeholder="电话" class="form-control">
                                             </div>
                                         </div>
                                         <div>
-                                            <button id="admin-updateSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
+                                            <button id="feedIngredient-updateSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
                                             </button>
                                         </div>
                                     </form>
@@ -494,50 +497,48 @@
 
 
 
-        <!--合同显示栏：合同ID，房东姓名，租房人姓名，开始时间，结束时间，房子ID-->
-        <div style="" id="conbox">
+        <!--FeedNutrition显示栏-->
+        <div style="" id="FeedNutritionbox">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>租赁合同管理</h5>
+                                <h5>FeedNutrition Manage</h5>
                                 <div class="ibox-tools">
-                                    <button id="con-addFeedBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                    <button id="feedNutrition-addFeedNutritionBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
                                 </div>
                             </div>
                             <div class="ibox-content">
                                 <div class="input-group">
-                                    <input id="con-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                                <button id="con-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                    <input id="feedNutrition-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="feedNutrition-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
                                 </div>
-                                <div id="ContractTable" th:fragment="ContractTable">
+                                <div id="FeedNutritionTable" th:fragment="FeedNutritionTable">
                                     <table class="footable table table-stripped toggle-arrow-tiny">
                                         <thead>
                                         <tr>
-                                            <th>合同编号</th>
-                                            <th>房东ID</th>
-                                            <th>租房人ID</th>
-                                            <th>开始时间</th>
-                                            <th>结束时间</th>
-                                            <th>房屋ID</th>
+                                            <th>Item</th>
+                                            <th>Nursing_feed_nutrition</th>
+                                            <th>Phase_1_feed_nutrition</th>
+                                            <th>Phase_2_feed_nutrition</th>
+                                            <th>Phase_3_feed_nutrition</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="con: ${con_list}">
-                                            <td th:text="${con?.CID}">null</td>
-                                            <td th:text="${con?.UID1}">null</td>
-                                            <td th:text="${con?.UID2}">null</td>
-                                            <td th:text="${con?.Ubegin}">null</td>
-                                            <td th:text="${con?.Uend}">null</td>
-                                            <td th:text="${con?.HID}">null</td>
+                                        <tr th:each="feedNutrition: ${feedNutrition_list}">
+                                            <td th:text="${feedNutrition?.item}">null</td>
+                                            <td th:text="${feedNutrition?.nursingFeedNutrition}">null</td>
+                                            <td th:text="${feedNutrition?.phase1FeedNutrition}">null</td>
+                                            <td th:text="${feedNutrition?.phase2FeedNutrition}">null</td>
+                                            <td th:text="${feedNutrition?.phase3FeedNutrition}">null</td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="con_updateBtn([[${con?.CID}]],[[${con?.UID1}]],[[${con?.UID2}]],[[${con?.Ubegin}]],[[${con?.Uend}]],[[${con?.HID}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                <button th:onclick="feedNutrition_updateBtn([[${feedNutrition?.item}]],[[${feedNutrition?.nursingFeedNutrition}]],[[${feedNutrition?.phase1FeedNutrition}]],[[${feedNutrition?.phase2FeedNutrition}]],[[${feedNutrition?.phase3FeedNutrition}]])" class="updateFeedNutritionBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="|con_deleteBtn(${con?.CID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                <button th:onclick="|feedNutrition_deleteBtn(${feedNutrition?.CID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-trash"></i> 删除
                                                 </button>
                                             </td>
@@ -552,7 +553,7 @@
             </div>
         </div>
 
-        <!--合同增加弹出框：房东姓名，租房人姓名，开始时间，结束时间，房子ID-->
+        <!--FeedNutrition增加弹出框-->
         <div id="con-modal-form-add" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -607,7 +608,7 @@
             </div>
         </div>
 
-        <!--合同修改弹出框：合同ID，房东姓名，租房人姓名，开始时间，结束时间，房子ID-->
+        <!--FeedNutrition修改弹出框-->
         <div id="con-modal-form-update" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -670,56 +671,54 @@
 
 
 
-        <!--房屋显示栏：房子ID，名称，类型，租金，大小，层数，朝向，拥有人编号，点击数，发布日期-->
-        <div style="" id="housebox">
+        <!--Metabolism显示栏-->
+        <div style="" id="metabolismbox">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>房屋管理</h5>
+                                <h5>Metabolism Manage</h5>
                                 <div class="ibox-tools">
-                                    <button id="house-addFeedBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                    <button id="metabolism-addMetabolismBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
                                 </div>
                             </div>
                             <div class="ibox-content">
                                 <div class="input-group">
-                                    <input id="house-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                                <button id="house-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                    <input id="metabolism-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="metabolism-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
                                 </div>
-                                <div id="HouseTable" th:fragment="HouseTable">
+                                <div id="MetabolismTable" th:fragment="MetabolismTable">
                                     <table class="footable table table-stripped toggle-arrow-tiny">
                                         <thead>
                                         <tr>
-                                            <th>房屋编号</th>
-                                            <th>名称</th>
-                                            <th>类型</th>
-                                            <th>租金</th>
-                                            <th>大小</th>
-                                            <th>层数</th>
-                                            <th>朝向</th>
-                                            <th>拥有人姓名</th>
-                                            <th>发布日期</th>
+                                            <th>metabolism_ind</th>
+                                            <th>metabolism_name</th>
+                                            <th>Fold_change</th>
+                                            <th>P_value</th>
+                                            <th>VIP</th>
+                                            <th>Sample</th>
+                                            <th>identification</th>
+                                            <th>time</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="house: ${house_list}">
-                                            <td th:text="${house?.HID}">null</td>
-                                            <td th:text="${house?.Hname}" class="line-limit-length">null</td>
-                                            <td th:text="${house?.Hkind}">null</td>
-                                            <td th:text="${house?.Hcost}">null</td>
-                                            <td th:text="${house?.Harea}">null</td>
-                                            <td th:text="${house?.Hfloor}">null</td>
-                                            <td th:text="${house?.Hdirection}">null</td>
-                                            <td th:text="${house?.Howner}">null</td>
-                                            <td th:text="${house?.Hdate}">null</td>
+                                        <tr th:each="metabolism: ${metabolism_list}">
+                                            <td th:text="${metabolism?.metabolismInd}">null</td>
+                                            <td th:text="${metabolism?.metabolismName}" class="line-limit-length">null</td>
+                                            <td th:text="${metabolism?.foldChange}">foldChange</td>
+                                            <td th:text="${metabolism?.pValue}">null</td>
+                                            <td th:text="${metabolism?.vip}">null</td>
+                                            <td th:text="${metabolism?.sample}">null</td>
+                                            <td th:text="${metabolism?.identification}">null</td>
+                                            <td th:text="${metabolism?.time}">null</td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="house_updateBtn([[${house?.HID}]],[[${house?.Hname}]],[[${house?.Hkind}]],[[${house?.Hcost}]],[[${house?.Harea}]],[[${house?.Hfloor}]],[[${house?.Hdirection}]],[[${house?.Howner}]],[[${house?.Hclick}]],[[${house?.Hdate}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                <button th:onclick="metabolism_updateBtn([[${metabolism?.HID}]],[[${metabolism?.Hname}]],[[${metabolism?.Hkind}]],[[${metabolism?.Hcost}]],[[${metabolism?.Harea}]],[[${metabolism?.Hfloor}]],[[${metabolism?.Hdirection}]],[[${metabolism?.Howner}]],[[${metabolism?.Hclick}]],[[${metabolism?.Hdate}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="|house_deleteBtn(${house?.HID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                <button th:onclick="|metabolism_deleteBtn(${metabolism?.metabolismInd})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-trash"></i> 删除
                                                 </button>
                                             </td>
@@ -734,8 +733,8 @@
             </div>
         </div>
 
-        <!--房屋修改弹出框：房子ID，名称，类型，租金，大小，层数，朝向，拥有人编号，点击数-->
-        <div id="house-modal-form-update" class="modal fade" aria-hidden="true">
+        <!--metabolism修改弹出框-->
+        <div id="metabolism-modal-form-update" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -745,63 +744,63 @@
                                     <h5>修改房屋信息</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <form id="house-updateForm" class="form-horizontal">
+                                    <form id="metabolism-updateForm" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">房屋编号：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateId" type="text" placeholder="房屋编号" class="form-control" disabled>
+                                                <input id="metabolism-updateId" type="text" placeholder="房屋编号" class="form-control" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">名称：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHname" type="text" placeholder="名称" class="form-control">
+                                                <input id="metabolism-updateHname" type="text" placeholder="名称" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">类型：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHkind" type="text" placeholder="类型" class="form-control">
+                                                <input id="metabolism-updateHkind" type="text" placeholder="类型" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">租金：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHcost" type="text" placeholder="租金" class="form-control">
+                                                <input id="metabolism-updateHcost" type="text" placeholder="租金" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">大小：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHarea" type="text" placeholder="大小" class="form-control">
+                                                <input id="metabolism-updateHarea" type="text" placeholder="大小" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">层数：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHfloor" type="text" placeholder="层数" class="form-control">
+                                                <input id="metabolism-updateHfloor" type="text" placeholder="层数" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">朝向：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHdirection" type="text" placeholder="朝向" class="form-control">
+                                                <input id="metabolism-updateHdirection" type="text" placeholder="朝向" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">拥有人编号：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHowner" type="text" placeholder="拥有人编号" class="form-control">
+                                                <input id="metabolism-updateHowner" type="text" placeholder="拥有人编号" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">点击量：</label>
                                             <div class="col-sm-8">
-                                                <input id="house-updateHclick" type="text" placeholder="点击量" class="form-control">
+                                                <input id="metabolism-updateHclick" type="text" placeholder="点击量" class="form-control">
                                             </div>
                                         </div>
                                         <div>
-                                            <button id="house-updateSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
+                                            <button id="metabolism-updateSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
                                             </button>
                                         </div>
                                     </form>
@@ -814,16 +813,16 @@
         </div>
 
 
-        <!--留言显示栏：留言编号，留言人姓名，内容，日期，点击量-->
-        <div style="" id="mesbox">
+        <!--MetabolismAll显示栏-->
+        <div style="" id="MetabolismAllbox">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>留言管理</h5>
+                                <h5>MetabolismAll Manage</h5>
                                 <div class="ibox-tools">
-                                    <button id="word-addFeedBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                    <button id="word-addMetabolismAllBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
                                 </div>
                             </div>
                             <div class="ibox-content">
@@ -831,31 +830,28 @@
                                     <input id="word-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
                                                 <button id="word-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
                                 </div>
-                                <div id="WordTable" th:fragment="WordTable">
+                                <div id="MetabolismAllTable" th:fragment="MetabolismAllTable">
                                     <table class="footable table table-stripped toggle-arrow-tiny">
                                         <thead>
                                         <tr>
-                                            <th>留言编号</th>
-                                            <th>留言人编号</th>
-                                            <th>内容</th>
-                                            <th>发布日期</th>
-                                            <th>点击量</th>
+                                            <th>name</th>
+                                            <th>metabolism_KE</th>
+                                            <th>metabolis_HMDB_ID</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="word: ${word_list}">
-                                            <td th:text="${word?.WID}">null</td>
-                                            <td th:text="${word?.Wpost}">null</td>
-                                            <td th:text="${word?.Wtext}" class="line-limit-length">null</td>
-                                            <td th:text="${word?.Wdate}">null</td>
-                                            <td th:text="${word?.Wclick}">null</td>
-                                            <td style="width: 50px;">               <!--留言修改弹出框：留言编号，留言人编号，日期，点击量-->
-                                                <button th:onclick="word_updateBtn([[${word?.WID}]],[[${word?.Wpost}]],[[${word?.Wdate}]],[[${word?.Wclick}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                        <tr th:each="metabolismAll: ${metabolismAll_list}">
+                                            <td th:text="${metabolismAll?.name}">null</td>
+                                            <td th:text="${metabolismAll?.metabolismKE}">null</td>
+                                            <td th:text="${metabolismAll?.metabolisHMDBId}" class="line-limit-length">null</td>
+
+                                            <td style="width: 50px;">               <!--metabolismAll修改弹出框-->
+                                                <button th:onclick="metabolismAll_updateBtn([[${metabolismAll?.name}]],[[${metabolismAll?.metabolismKE}]],[[${metabolismAll?.metabolisHMDBId}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="|word_deleteBtn(${word?.WID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                <button th:onclick="|metabolismAll_deleteBtn(${word?.WID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-trash"></i> 删除
                                                 </button>
                                             </td>
@@ -869,7 +865,7 @@
                 </div>
             </div>
         </div>
-        <!--留言修改弹出框：留言编号，留言人编号，日期，点击量-->
+        <!--MetabolismAll修改弹出框-->
         <div id="word-modal-form-update" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -920,48 +916,54 @@
 
 
 
-        <!--新闻显示栏：新闻编号，发布人编号，新闻标题，新闻内容，发布日期，点击量-->
-        <div style="" id="newsbox">
+        <!--Microbe显示栏-->
+        <div style="" id="microbebox">
             <div class="wrapper wrapper-content animated fadeInRight">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>新闻公告管理</h5>
+                                <h5>Microbe Manage</h5>
                                 <div class="ibox-tools">
-                                    <button id="news-addFeedBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                    <button id="microbe-addMicrobeBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
                                 </div>
                             </div>
                             <div class="ibox-content">
                                 <div class="input-group">
-                                    <input id="news-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
-                                                <button id="news-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                    <input id="microbe-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="microbe-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
                                 </div>
-                                <div id="NewsTable" th:fragment="NewsTable">
+                                <div id="MicrobeTable" th:fragment="MicrobeTable">
                                     <table class="footable table table-stripped toggle-arrow-tiny">
                                         <thead>
                                         <tr>
-                                            <th>新闻编号</th>
-                                            <th>发布人编号</th>
-                                            <th>新闻标题</th>
-                                            <th>发布日期</th>
-                                            <th>点击量</th>
+                                            <th>microbe_id</th>
+                                            <th>taxonomy</th>
+                                            <th>microbe_Name</th>
+                                            <th>col</th>
+                                            <th>days</th>
+                                            <th>abundance</th>
+                                            <th>P_value_dpf_tpf</th>
+                                            <th>P_value_age</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="news: ${news_list}">
-                                            <td th:text="${news?.NID}">null</td>
-                                            <td th:text="${news?.Npost}">null</td>
-                                            <td th:text="${news?.Nheader}" class="line-limit-length">null</td>
-                                            <td th:text="${news?.Ndate}">null</td>
-                                            <td th:text="${news?.Nclick}">null</td>
-                                            <td style="width: 50px;">               <!--新闻修改弹出框：新闻编号，发布人编号，新闻标题，发布日期，点击量-->
-                                                <button th:onclick="news_updateBtn([[${news?.NID}]],[[${news?.Npost}]],[[${news?.Nheader}]],[[${news?.Ndate}]],[[${news?.Nclick}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                        <tr th:each="microbe: ${microbe_list}">
+                                            <td th:text="${microbe?.microbeId}">null</td>
+                                            <td th:text="${microbe?.taxonomy}">null</td>
+                                            <td th:text="${microbe?.microbeName}" class="line-limit-length">null</td>
+                                            <td th:text="${microbe?.col}">null</td>
+                                            <td th:text="${microbe?.days}">null</td>
+                                            <td th:text="${microbe?.abundance}" class="line-limit-length">null</td>
+                                            <td th:text="${microbe?.pValueDpfTpf}">null</td>
+                                            <td th:text="${microbe?.pValueAge}">null</td>
+                                            <td style="width: 50px;">               <!--microbe修改弹出框-->
+                                                <button th:onclick="microbe_updateBtn([[${microbe?.microbeId}]],[[${microbe?.taxonomy}]],[[${microbe?.microbeName}]],[[${microbe?.col}]],[[${microbe?.days}]],[[${microbe?.abundance}]],[[${microbe?.pValueDpfTpf}]],[[${microbe?.pValueAge}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="|news_deleteBtn(${news?.NID})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                <button th:onclick="|microbe_deleteBtn(${microbe?.microbeId})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-trash"></i> 删除
                                                 </button>
                                             </td>
@@ -975,8 +977,8 @@
                 </div>
             </div>
         </div>
-        <!--新闻修改弹出框：新闻编号，发布人编号，新闻标题，发布日期，点击量-->
-        <div id="news-modal-form-update" class="modal fade" aria-hidden="true">
+        <!--microbe修改弹出框-->
+        <div id="microbe-modal-form-update" class="modal fade" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -986,39 +988,39 @@
                                     <h5>修改新闻公告信息</h5>
                                 </div>
                                 <div class="ibox-content">
-                                    <form id="news-updateForm" class="form-horizontal">
+                                    <form id="microbe-updateForm" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">新闻编号：</label>
                                             <div class="col-sm-8">
-                                                <input id="news-updateId" type="text" placeholder="新闻编号" class="form-control" disabled>
+                                                <input id="microbe-updateId" type="text" placeholder="新闻编号" class="form-control" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">发布人编号：</label>
                                             <div class="col-sm-8">
-                                                <input id="news-updateNpost" type="text" placeholder="发布人编号" class="form-control">
+                                                <input id="microbe-updateNpost" type="text" placeholder="发布人编号" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">新闻标题：</label>
                                             <div class="col-sm-8">
-                                                <input id="news-updateNheader" type="text" placeholder="新闻标题" class="form-control">
+                                                <input id="microbe-updateNheader" type="text" placeholder="新闻标题" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">发布日期：</label>
                                             <div class="col-sm-8">
-                                                <input id="news-updateNdate" type="date" placeholder="发布日期" class="form-control">
+                                                <input id="microbe-updateNdate" type="date" placeholder="发布日期" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">点击量：</label>
                                             <div class="col-sm-8">
-                                                <input id="news-updateNclick" type="text" placeholder="点击量" class="form-control">
+                                                <input id="microbe-updateNclick" type="text" placeholder="点击量" class="form-control">
                                             </div>
                                         </div>
                                         <div>
-                                            <button id="news-updateSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
+                                            <button id="microbe-updateSubmitBtn" class="btn btn-primary btn-primary pull-right m-t-n-xs" type="button"><i class="fa fa-check"></i>&nbsp;提交
                                             </button>
                                         </div>
                                     </form>
@@ -1029,7 +1031,166 @@
                 </div>
             </div>
         </div>
+        <!--MicrobeAll显示栏-->
+        <div style="" id="MicrobeAllbox">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>MicrobeAll Manage</h5>
+                                <div class="ibox-tools">
+                                    <button id="word-addMicrobeAllBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="input-group">
+                                    <input id="microbeAll-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="microbeAll-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                </div>
+                                <div id="MicrobeAllTable" th:fragment="MicrobeAllTable">
+                                    <table class="footable table table-stripped toggle-arrow-tiny">
+                                        <thead>
+                                        <tr>
+                                            <th>microbe_index</th>
+                                            <th>microbe_name</th>
+                                            <th>Taxonomy</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="microbeAll: ${microbeAll_list}">
+                                            <td th:text="${microbeAll?.microbeIndex}">null</td>
+                                            <td th:text="${microbeAll?.microbeName}">null</td>
+                                            <td th:text="${microbeAll?.taxonomy}" class="line-limit-length">null</td>
 
+                                            <td style="width: 50px;">               <!--microbeAll修改弹出框-->
+                                                <button th:onclick="microbeAll_updateBtn([[${microbeAll?.microbeIndex}]],[[${microbeAll?.microbeName}]],[[${microbeAll?.taxonomy}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                    <i class="fa fa-edit"></i> 修改
+                                                </button>
+                                            </td>
+                                            <td style="width: 50px;">
+                                                <button th:onclick="|microbeAll_deleteBtn(${microbeAll?.microbeIndex})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                    <i class="fa fa-trash"></i> 删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Times显示栏-->
+        <div style="" id="Timesbox">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Times Manage</h5>
+                                <div class="ibox-tools">
+                                    <button id="times-addTimesBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="input-group">
+                                    <input id="times-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="times-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                </div>
+                                <div id="TimesTable" th:fragment="TimesTable">
+                                    <table class="footable table table-stripped toggle-arrow-tiny">
+                                        <thead>
+                                        <tr>
+                                            <th>days</th>
+                                            <th>phase</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="times: ${times_list}">
+                                            <td th:text="${times?.days}">null</td>
+                                            <td th:text="${times?.phase}">null</td>
+                                            <td style="width: 50px;">               <!--times修改弹出框-->
+                                                <button th:onclick="times_updateBtn([[${times?.days}]],[[${times?.phase}]])" class="updateTimesBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                    <i class="fa fa-edit"></i> 修改
+                                                </button>
+                                            </td>
+                                            <td style="width: 50px;">
+                                                <button th:onclick="|times_deleteBtn(${times?.days})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                    <i class="fa fa-trash"></i> 删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Swine显示栏-->
+        <div style="" id="swinebox">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Swine Manage</h5>
+                                <div class="ibox-tools">
+                                    <button id="swine-addSwineBtn" class="btn btn-xs btn-rounded btn-primary"><i class="fa fa-plus"></i> 添加</button>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="input-group">
+                                    <input id="swine-search" type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                                <button id="swine-findBtn" type="button" class="btn btn-sm btn-primary"><i class="fa fa-search"> 搜索</i> </button> </span>
+                                </div>
+                                <div id="SwineTable" th:fragment="SwineTable">
+                                    <table class="footable table table-stripped toggle-arrow-tiny">
+                                        <thead>
+                                        <tr>
+                                            <th>swine_index</th>
+                                            <th>swine_tag</th>
+                                            <th>col_id</th>
+                                            <th>sex</th>
+                                            <th>ages</th>
+                                            <th>weights</th>
+                                            <th>assay_station</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="swine: ${swine_list}">
+                                            <td th:text="${swine?.swineIndex}">null</td>
+                                            <td th:text="${swine?.swineTag}">null</td>
+                                            <td th:text="${swine?.colId}" class="line-limit-length">null</td>
+                                            <td th:text="${swine?.sex}">null</td>
+                                            <td th:text="${swine?.ages}">null</td>
+                                            <td th:text="${swine?.weights}" class="line-limit-length">null</td>
+                                            <td th:text="${swine?.assayStation}">null</td>
+                                            <td style="width: 50px;">               <!--swine修改弹出框-->
+                                                <button th:onclick="swine_updateBtn([[${swine?.swineIndex}]],[[${swine?.swineTag}]],[[${swine?.colId}]],[[${swine?.sex}]],[[${swine?.ages}]],[[${swine?.weights}]],[[${swine?.assayStation}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                    <i class="fa fa-edit"></i> 修改
+                                                </button>
+                                            </td>
+                                            <td style="width: 50px;">
+                                                <button th:onclick="|swine_deleteBtn(${swine?.swineIndex})|" class="deleteFeedBtn btn btn-danger btn-xs btn-rounded" type="button">
+                                                    <i class="fa fa-trash"></i> 删除
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1071,15 +1232,15 @@
 		})
 	}
 
-    function admin_deleteBtn(id) {
+    function feedIngredient_deleteBtn(id) {
         $.ajax({
             type: 'POST',
-            url: '/admin/delete',
+            url: '/feedIngredient/delete',
             data: {
                 'id': id
             },
             success: function (data) {
-                $('#AdminTable').html(data)
+                $('#FeedIngredientTable').html(data)
             },
             error: function (err) {
                 console.log(err)
@@ -1096,7 +1257,7 @@
                 'id': id
             },
             success: function (data) {
-                $('#ContractTable').html(data)
+                $('#feedNutritionTable').html(data)
             },
             error: function (err) {
                 console.log(err)
@@ -1105,15 +1266,15 @@
         })
     }
 
-    function house_deleteBtn(id) {
+    function metabolism_deleteBtn(id) {
         $.ajax({
             type: 'POST',
-            url: '/house/delete',
+            url: '/metabolism/delete',
             data: {
                 'id': id
             },
             success: function (data) {
-                $('#HouseTable').html(data)
+                $('#MetabolismTable').html(data)
             },
             error: function (err) {
                 console.log(err)
@@ -1139,15 +1300,15 @@
         })
     }
 
-    function news_deleteBtn(id) {
+    function microbe_deleteBtn(id) {
         $.ajax({
             type: 'POST',
-            url: '/news/delete',
+            url: '/microbe/delete',
             data: {
                 'id': id
             },
             success: function (data) {
-                $('#NewsTable').html(data)
+                $('#MicrobeTable').html(data)
             },
             error: function (err) {
                 console.log(err)
@@ -1169,14 +1330,14 @@
         $('#feed-updateUphone').val(phone)
 	}
 
-    function admin_updateBtn(id, account, name, password, phone) {
+    function feedIngredient_updateBtn(id, account, name, password, phone) {
         // 传递数据到弹出框
-        $('#admin-modal-form-update').modal('show');
-        $('#admin-updateId').val(id)
-        $('#admin-updateAaccount').val(account)
-        $('#admin-updateAname').val(name)
-        $('#admin-updateApassword').val(password)
-        $('#admin-updateAphone').val(phone)
+        $('#feedIngredient-modal-form-update').modal('show');
+        $('#feedIngredient-updateId').val(id)
+        $('#feedIngredient-updateAaccount').val(account)
+        $('#feedIngredient-updateAname').val(name)
+        $('#feedIngredient-updateApassword').val(password)
+        $('#feedIngredient-updateAphone').val(phone)
     }
 
     <!--合同修改弹出框：合同ID，房东姓名，租房人姓名，开始时间，结束时间，房子名称-->
@@ -1192,19 +1353,19 @@
     }
 
     <!--房屋显示栏：房子ID，名称，类型，租金，大小，层数，朝向，拥有人编号，点击数，发布日期-->
-    function house_updateBtn(id, name, kind, cost, area, floor, direct, owner, click, date) {
+    function metabolism_updateBtn(id, name, kind, cost, area, floor, direct, owner, click, date) {
         // 传递数据到弹出框
-        $('#house-modal-form-update').modal('show');
-        $('#house-updateId').val(id)
-        $('#house-updateHname').val(name)
-        $('#house-updateHkind').val(kind)
-        $('#house-updateHcost').val(cost)
-        $('#house-updateHarea').val(area)
-        $('#house-updateHfloor').val(floor)
-        $('#house-updateHdirection').val(direct)
-        $('#house-updateHowner').val(owner)
-        $('#house-updateHclick').val(click)
-        $('#house-updateHdate').val(date)
+        $('#metabolism-modal-form-update').modal('show');
+        $('#metabolism-updateId').val(id)
+        $('#metabolism-updateHname').val(name)
+        $('#metabolism-updateHkind').val(kind)
+        $('#metabolism-updateHcost').val(cost)
+        $('#metabolism-updateHarea').val(area)
+        $('#metabolism-updateHfloor').val(floor)
+        $('#metabolism-updateHdirection').val(direct)
+        $('#metabolism-updateHowner').val(owner)
+        $('#metabolism-updateHclick').val(click)
+        $('#metabolism-updateHdate').val(date)
     }
 
     <!--留言修改弹出框：留言编号，留言人编号，日期，点击量-->
@@ -1218,14 +1379,14 @@
     }
 
     <!--新闻修改弹出框：新闻编号，发布人编号，新闻标题，发布日期，点击量-->
-    function news_updateBtn(id, post, header, date, click) {
+    function microbe_updateBtn(id, post, header, date, click) {
         // 传递数据到弹出框
-        $('#news-modal-form-update').modal('show');
-        $('#news-updateId').val(id)
-        $('#news-updateNpost').val(post)
-        $('#news-updateNheader').val(header)
-        $('#news-updateNdate').val(date)
-        $('#news-updateNclick').val(click)
+        $('#microbe-modal-form-update').modal('show');
+        $('#microbe-updateId').val(id)
+        $('#microbe-updateNpost').val(post)
+        $('#microbe-updateNheader').val(header)
+        $('#microbe-updateNdate').val(date)
+        $('#microbe-updateNclick').val(click)
     }
     
 

@@ -29,7 +29,7 @@ $('#feed-findBtn').click(function () {
 	})
 })
 
-// 用户 添加 <!--用户增加弹出框：账号，密码，姓名，性别，生日，电话-->
+// feed 添加
 $('#feed-addSubmitBtn').click(function () {
     //变量
 	var account = $('#feed-addUaccount').val()
