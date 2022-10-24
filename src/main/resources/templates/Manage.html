@@ -163,7 +163,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="user: ${feed_list}">
+                                        <tr th:each="feed: ${feed_list}">
                                             <td th:text="${feed?.feedIndex}">feedIndex</td>
                                             <td th:text="${feed?.tag}">tag</td>
                                             <td th:text="${feed?.time}">time</td>
@@ -713,7 +713,7 @@
                                             <td th:text="${metabolism?.identification}">null</td>
                                             <td th:text="${metabolism?.time}">null</td>
                                             <td style="width: 50px;">
-                                                <button th:onclick="metabolism_updateBtn([[${metabolism?.HID}]],[[${metabolism?.Hname}]],[[${metabolism?.Hkind}]],[[${metabolism?.Hcost}]],[[${metabolism?.Harea}]],[[${metabolism?.Hfloor}]],[[${metabolism?.Hdirection}]],[[${metabolism?.Howner}]],[[${metabolism?.Hclick}]],[[${metabolism?.Hdate}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
+                                                <button th:onclick="metabolism_updateBtn([[${metabolism?.metabolismInd}]],[[${metabolism?.metabolismName}]],[[${metabolism?.foldChange}]],[[${metabolism?.pValue}]],[[${metabolism?.vip}]],[[${metabolism?.sample}]],[[${metabolism?.identification}]],[[${metabolism?.time}]])" class="updateFeedBtn btn btn-warning btn-xs btn-rounded" type="button">
                                                     <i class="fa fa-edit"></i> 修改
                                                 </button>
                                             </td>

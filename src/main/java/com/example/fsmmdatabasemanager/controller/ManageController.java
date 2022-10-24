@@ -3,12 +3,14 @@ package com.example.fsmmdatabasemanager.controller;
 import com.example.fsmmdatabasemanager.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/manage")
+
 public class ManageController {
     @Autowired
     FeedService feedService;
@@ -30,8 +32,10 @@ public class ManageController {
     TimesService timesService;
 
     @ResponseBody
+    @GetMapping("")
     public ModelAndView getAllData(){
         ModelAndView modelAndView = new ModelAndView("Manage");
+        modelAndView.setViewName("Manage");
         modelAndView.addObject("feed_list", feedService.selectALlFeed());
         modelAndView.addObject("feedingredient_list", feedIngredientService.getAllFeedIngredient());
         modelAndView.addObject("feednutrition_list", feedNutritionService.getAllFeedNutrition());

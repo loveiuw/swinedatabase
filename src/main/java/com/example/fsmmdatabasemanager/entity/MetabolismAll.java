@@ -18,7 +18,7 @@ public class MetabolismAll {
     @TableId(value = "name")
     private String name;
 
-    @TableField(value = "metabolism_KE")
+    @TableField(value = "metabolism_KEGG_ID")
     private String metabolismKE;
 
     @TableField(value = "metabolis_HMDB_ID")

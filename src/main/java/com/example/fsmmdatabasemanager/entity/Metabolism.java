@@ -15,7 +15,7 @@ import lombok.ToString;
 
 @TableName(value = "metabolism")
 public class Metabolism {
-    @TableId(value = "metabolism_ind")
+    @TableId(value = "metabolism_index")
     private int metabolismInd;
 
     @TableField(value = "metabolism_name")
