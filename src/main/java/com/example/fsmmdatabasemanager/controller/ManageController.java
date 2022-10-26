@@ -36,7 +36,7 @@ public class ManageController {
     public ModelAndView getAllData(){
         ModelAndView modelAndView = new ModelAndView("Manage");
         modelAndView.setViewName("Manage");
-        modelAndView.addObject("feed_list", feedService.selectALlFeed());
+        modelAndView.addObject("feed_list", feedService.getFeedByPage(1, 10));
         modelAndView.addObject("feedingredient_list", feedIngredientService.getAllFeedIngredient());
         modelAndView.addObject("feednutrition_list", feedNutritionService.getAllFeedNutrition());
         modelAndView.addObject("metabolism_list", metabolismService.getAllMetabolism());
