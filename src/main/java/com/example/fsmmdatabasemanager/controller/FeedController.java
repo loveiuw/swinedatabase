@@ -26,7 +26,7 @@ public class FeedController {
     @PostMapping("/update")
     public void updateFeed(HttpServletRequest request){
         Feed feed = new Feed();
-        feed.setFeedIndex(getMaxId());
+        feed.setFeedIndex(Integer.parseInt(request.getParameter("Feed_index")));
         feed.setTag(request.getParameter("tag"));
         feed.setTime(Integer.parseInt(request.getParameter("time")));
         feed.setNurseingFeedPercentage(Float.parseFloat(request.getParameter("Nurseing_feed_percentage")));

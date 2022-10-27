@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,8 +21,12 @@ public class FeedNutritionController {
     FeedNutritionService feedNutritionService;
 
     @GetMapping("/getbypage")
-    public List<FeedNutrition> getFeedNutritionBypage(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView getFeedNutritionBypage(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
         Page<Feed> page = new Page<>(pageNum, perPageNum);
-        return feedNutritionService.getFeedNutritionByPage(pageNum, perPageNum);
+        ModelAndView modelAndView = new ModelAndView("index");
+
+        List<FeedNutrition>  feedNutritionList = feedNutritionService.getFeedNutritionByPage(pageNum, perPageNum);
+        modelAndView.addObject("feednutrition_list", feedNutritionList);
+        return modelAndView;
     }
 }
