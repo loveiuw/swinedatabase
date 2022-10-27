@@ -1,5 +1,6 @@
 package com.example.fsmmdatabasemanager.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.fsmmdatabasemanager.entity.Feed;
 import com.example.fsmmdatabasemanager.repository.FeedRepository;
@@ -44,6 +45,12 @@ public class FeedService {
 
     public void delectFeed(int feedId){
         feedRepository.deleteById(feedId);
+    }
+
+    public int getMaxFeedId(){
+        QueryWrapper<Feed> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("max(Feed_index)");
+        return feedRepository.selectList(queryWrapper).get(0).getFeedIndex();
     }
 
 }

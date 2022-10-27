@@ -1,6 +1,7 @@
 package com.example.fsmmdatabasemanager.controller;
 
 import com.example.fsmmdatabasemanager.service.AdminsService;
+import com.example.fsmmdatabasemanager.utils.AjaxResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,15 @@ public class LoginController {
     AdminsService adminsService;
 
     @GetMapping("/loginpage")
-    public ModelAndView loginPage(HttpServletRequest request){
-        ModelAndView modelAndView= new ModelAndView("login");
-        modelAndView.addObject("", "");
-        return modelAndView;
+    public AjaxResult loginPage(HttpServletRequest request){
+        AjaxResult ajaxResult = new AjaxResult();
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        if(adminsService.logInByAccount(account).getAdminPassword().equals(password))
+            ajaxResult.setState("success");
+        else
+            ajaxResult.setState("error");
+        return ajaxResult;
     }
 
 }

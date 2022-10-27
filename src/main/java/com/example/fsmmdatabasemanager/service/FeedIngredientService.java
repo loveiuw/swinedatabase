@@ -25,4 +25,8 @@ public class FeedIngredientService {
         feedIngredientRepository.selectPage(page, null);
         return page.getRecords();
     }
+
+    public void deleteFeedIngredient(int id){
+        feedIngredientRepository.deleteById(id);
+    }
 }

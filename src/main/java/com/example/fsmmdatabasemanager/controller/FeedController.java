@@ -18,19 +18,48 @@ public class FeedController {
     @Autowired
     FeedService feedService;
 
-    @GetMapping("/deletefeed")
-    public void deleteFeed(int feedId){
-        feedService.delectFeed(feedId);
+    @GetMapping("/delete")
+    public void deleteFeed(HttpServletRequest request){
+        feedService.delectFeed(Integer.parseInt(request.getParameter("Feed_index")));
     }
 
-    @PostMapping("/updatefeed")
-    public void updateFeed(HttpServletRequest httpServletRequest){
+    @PostMapping("/update")
+    public void updateFeed(HttpServletRequest request){
+        Feed feed = new Feed();
+        feed.setFeedIndex(getMaxId());
+        feed.setTag(request.getParameter("tag"));
+        feed.setTime(Integer.parseInt(request.getParameter("time")));
+        feed.setNurseingFeedPercentage(Float.parseFloat(request.getParameter("Nurseing_feed_percentage")));
+        feed.setPhase1FeedPercentage(Float.parseFloat(request.getParameter("Phase_1_feed_percentage")));
+        feed.setPhase2FeedPercentage(Float.parseFloat(request.getParameter("Phase_2_feed_percentage")));
+        feed.setPhase3FeedPercentage(Float.parseFloat(request.getParameter("Phase_3_feed_percentage")));
+        feed.setDayOfIntake(Float.parseFloat(request.getParameter("day_of_intake")));
     }
 
-    @GetMapping("/getfeedbypage")
+    @GetMapping("/getbypage")
     public List<Feed> getFeedBypage(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
         Page<Feed> page = new Page<>(pageNum, perPageNum);
-        return page.getRecords();
+        return feedService.getFeedByPage(pageNum, perPageNum);
+    }
+
+    @GetMapping("/insert")
+    public void insertFeed(HttpServletRequest request){
+        Feed feed = new Feed();
+        feed.setFeedIndex(getMaxId());
+        feed.setTag(request.getParameter("tag"));
+        feed.setTime(Integer.parseInt(request.getParameter("time")));
+        feed.setNurseingFeedPercentage(Float.parseFloat(request.getParameter("Nurseing_feed_percentage")));
+        feed.setPhase1FeedPercentage(Float.parseFloat(request.getParameter("Phase_1_feed_percentage")));
+        feed.setPhase2FeedPercentage(Float.parseFloat(request.getParameter("Phase_2_feed_percentage")));
+        feed.setPhase3FeedPercentage(Float.parseFloat(request.getParameter("Phase_3_feed_percentage")));
+        feed.setDayOfIntake(Float.parseFloat(request.getParameter("day_of_intake")));
+        feedService.insertFeed(feed);
+    }
+
+    @GetMapping("/getmaxid")
+    @ResponseBody
+    public int getMaxId(){
+        return feedService.getMaxFeedId();
     }
 
 }

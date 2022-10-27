@@ -2,20 +2,14 @@ package com.example.fsmmdatabasemanager.utils;
 
 public class AjaxResult {
     private String msg;
+    private enum ALL_STATE{success, error};
+    private ALL_STATE state;
 
-    public AjaxResult(){
-        this.msg = "";
-    }
+    public String getMsg() {return msg; }
 
-    public AjaxResult(String msg) {
-        this.msg = msg;
-    }
+    public ALL_STATE getState(){ return state; }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setState(String res){
+        state = ALL_STATE.valueOf(res);
     }
 }
