@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -120,10 +119,10 @@
                             <span>Tables</span>
                         </li>
                        
-                        <li>
+                        <li class="active">
                             <a href="javascript:;"><i class="la la-bell"></i> <span>Feed</span></a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href=""><i class="la la-cube"></i> <span>Feed_ingredient</span></a>
                         </li>
                         <li>
@@ -244,11 +243,12 @@
                                         <div class="absolute right-0 border border-blackOpacity rounded-[3px] bg-white min-w-[120px] z-50"
                                             x-show="cardAction"><a
                                                 class="block clear-both w-full text-left text-[13px] whitespace-nowrap px-[10px] py-[5px] hover:bg-[#e9ecef]"
-                                                @click="editmodalOpen = ! editmodalOpen" href="javascript:;"><i
+                                                @click="editmodalOpen = ! editmodalOpen"
+                                                href="javascript:;"><i
                                                     class="fa fa-pencil mr-[5px]"></i>Edit</a><a
                                                 class="block clear-both w-full text-left text-[13px] whitespace-nowrap px-[10px] py-[5px] hover:bg-[#e9ecef]"
-                                                @click="deletemodelOpen = ! deletemodelOpen" href="javascript:;"><i
-                                                    class="fa fa-trash-o mr-[5px]"></i>Delete</a></div>
+                                                @click="editmodalOpen = ! editmodalOpen"
+                                                class="fa fa-trash-o mr-[5px]"></i>Delete</a></div>
                                         <div x-show="deletemodelOpen"
                                             class="fixed top-0 left-0 right-0 w-full text-left h-full outline-none overflow-x-hidden overflow-y-auto z-[9999]"
                                             @click.prevent="cardAction=false" aria-labelledby="modal-title"
@@ -322,37 +322,37 @@
                                                                 <div><label>Feed_index <span
                                                                             class="text-danger">*</span></label><input
                                                                         class="block w-full inputStyle" type="text"
-                                                                        value="1" disabled></div>
+                                                                        value="1" disabled id="feed-updateIndex"></div>
                                                                 <div><label><span
-                                                                        class="text-[#1f1f1f]">tag</span><select
+                                                                        class="text-[#1f1f1f]">tag</span><select id="feed-updateTag"
                                                                         class="form-select block w-full text-[#676767]">
                                                                     <option selected="">TPF
                                                                     </option>
                                                                     <option>DPT</option>
                                                                 </select></label></div>
-                                                                <div><label>time</label><input
+                                                                <div><label>time</label><input id="feed-updateTime"
                                                                         class="block w-full inputStyle" type="text"
                                                                         value="0"></div>
                                                                 <div><label>Nurseing_feed_percentage <span
-                                                                            class="text-danger">*</span></label><input
+                                                                            class="text-danger">*</span></label><input id="feed-updateNurse"
                                                                         class="block w-full inputStyle" type="text"
                                                                         value="0"></div>
                                                                 <div><label>Phase_1_feed_percentage <span
-                                                                            class="text-danger">*</span></label><input
+                                                                            class="text-danger">*</span></label><input id="feed-updatePhase1"
                                                                         class="block w-full inputStyle" type="text"
                                                                         value="100"></div>
-                                                                <div><label>Phase_2_feed_percentage</label><input
+                                                                <div><label>Phase_2_feed_percentage</label><input id="feed-updatePhase2"
                                                                         class="block w-full inputStyle" type="text"
                                                                         value="100"></div>
-                                                                <div><label>Phase_3_feed_percentage</label><input
+                                                                <div><label>Phase_3_feed_percentage</label><input id="feed-updatePhase3"
                                                                         class="block w-full inputStyle" type="text">
                                                                 </div>
-                                                                <div><label>day_of_intake </label><input
+                                                                <div><label>day_of_intake </label><input id="feed-updateDayOfIntake"
                                                                         class="block w-full inputStyle" type="text"
                                                                         value="0"></div>
                                                             </div>                                                          
-                                                            <div class="mt-10 text-center"><button class="submit-btn"
-                                                                    @click="editmodalOpen = false">Save</button></div>
+                                                            <div class="mt-10 text-center"><button class="submit-btn" id="feed-updateSubmitBtn"
+                                                              >Save</button></div>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -423,9 +423,10 @@
             </div>
         </div>
     </div>
-    <script src="/static/js/jquery-3.6.0.min.js"></script>
-    <script src="/static/js/jquery.dataTables.min.js"></script>
-    <script src="/static/js/app.js"></script>
+    <script src="../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/jquery.dataTables.min.js"></script>
+    <script src="../static/js/app.js"></script>
+    <script src="../static/js/index/index.js"></script>
 </body>
 
 </html>
