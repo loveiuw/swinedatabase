@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feednutrition")
+@RequestMapping("/table/feednutrition")
 public class FeedNutritionController {
     @Resource
     FeedNutritionService feedNutritionService;

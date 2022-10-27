@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feedingredient")
+@RequestMapping("/table/feedingredient")
 public class FeedIngredientController {
     @Resource
     FeedIngredientService feedIngredientService;

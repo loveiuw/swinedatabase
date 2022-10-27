@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feed")
+@RequestMapping("table/feed")
 
 public class FeedController {
     @Autowired
