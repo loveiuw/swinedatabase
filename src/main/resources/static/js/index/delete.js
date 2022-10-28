@@ -1,9 +1,9 @@
-function deleteBtn(id) {
+function feed_deleteBtn(index) {
     $.ajax({
         type: 'POST',
         url: '/feed/delete',
         data: {
-            'id': id
+            'Feed_index': index
         },
         success: function (data) {
             $('#feed-feedTable').html(data)

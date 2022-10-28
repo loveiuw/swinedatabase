@@ -242,12 +242,10 @@
                                                 class="material-icons">more_vert</i></a>
                                         <div class="absolute right-0 border border-blackOpacity rounded-[3px] bg-white min-w-[120px] z-50"
                                             x-show="cardAction"><a
+                                                @click="editmodalOpen = ! editmodalOpen" href="javascript:;"><i
+                                                class="fa fa-pencil mr-[5px]"></i>Edit</a><a
                                                 class="block clear-both w-full text-left text-[13px] whitespace-nowrap px-[10px] py-[5px] hover:bg-[#e9ecef]"
-                                                @click="editmodalOpen = ! editmodalOpen"
-                                                href="javascript:;"><i
-                                                    class="fa fa-pencil mr-[5px]"></i>Edit</a><a
-                                                class="block clear-both w-full text-left text-[13px] whitespace-nowrap px-[10px] py-[5px] hover:bg-[#e9ecef]"
-                                                @click="editmodalOpen = ! editmodalOpen"
+                                                @click="deletemodelOpen = ! deletemodelOpen" href="javascript:;"><i
                                                 class="fa fa-trash-o mr-[5px]"></i>Delete</a></div>
                                         <div x-show="deletemodelOpen"
                                             class="fixed top-0 left-0 right-0 w-full text-left h-full outline-none overflow-x-hidden overflow-y-auto z-[9999]"
@@ -389,44 +387,82 @@
                         @click="modalOpen = false"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="p-[30px]">
-                    <form>
+                    <form id="feed-addForm">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div><label>Feed_index <span class="text-danger">*</span></label><input
-                                    class="block w-full inputStyle" type="text"></div>
-                            <div><label>tag</label><input class="block w-full inputStyle" type="text"></div>
-                            <div><label>time <span class="text-danger">*</span></label><input
-                                    class="block w-full inputStyle" type="text"></div>
-                            <div><label>Nurseing_feed_percentage <span class="text-danger">*</span></label><input
-                                    class="block w-full inputStyle" type="text"></div>
-                            <div><label>Phase_1_feed_percentage</label><input class="block w-full inputStyle" type="text"></div>
-                            <div><label>Phase_2_feed_percentage</label><input class="block w-full inputStyle" type="text">
+                            <div><label><span
+                                    class="text-[#1f1f1f]">tag</span><select id="feed-addTag"
+                                                                             class="form-select block w-full text-[#676767]">
+                                <option selected="">TPF
+                                </option>
+                                <option>DPT</option>
+                            </select></label></div>
+                            <div><label>time</label><input id="feed-addTime"
+                                                           class="block w-full inputStyle" type="text"
+                                                           value="0"></div>
+                            <div><label>Nurseing_feed_percentage <span
+                                    class="text-danger">*</span></label><input id="feed-addNurse"
+                                                                               class="block w-full inputStyle" type="text"
+                                                                               value="0"></div>
+                            <div><label>Phase_1_feed_percentage <span
+                                    class="text-danger">*</span></label><input id="feed-addPhase1"
+                                                                               class="block w-full inputStyle" type="text"
+                                                                               value="100"></div>
+                            <div><label>Phase_2_feed_percentage</label><input id="feed-addPhase2"
+                                                                              class="block w-full inputStyle" type="text"
+                                                                              value="100"></div>
+                            <div><label>Phase_3_feed_percentage</label><input id="feed-addPhase3"
+                                                                              class="block w-full inputStyle" type="text">
                             </div>
-                            <div><label>Phase_3_feed_percentage </label><input class="block w-full inputStyle" type="text"></div>
-                            <div><label><span class="text-[#1f1f1f]">Role</span><select
-                                        class="form-select block w-full text-[#676767]">
-                                        <option>Admin</option>
-                                        <option>Client</option>
-                                        <option>Employee</option>
-                                    </select></label></div>
-                            <div><label><span class="text-[#1f1f1f]">day_of_intake</span><select
-                                        class="form-select block w-full text-[#676767]">
-                                        <option>Global Technologies</option>
-                                        <option>Delta Infotech</option>
-                                    </select></label></div>
-                            <div><label>Employee ID <span class="text-danger">*</span></label><input
-                                    class="block w-full inputStyle" type="text"></div>
+                            <div><label>day_of_intake </label><input id="feed-addDayOfIntake"
+                                                                     class="block w-full inputStyle" type="text"
+                                                                     value="0"></div>
                         </div>
-                        <div class="mt-10 text-center"><button class="submit-btn"
-                                @click="modalOpen = false">Submit</button></div>
+                        <div class="mt-10 text-center"><button class="submit-btn" id="feed-addSubmitBtn"
+                               >Submit</button></div>
                     </form>
                 </div>
+<!--                <div class="p-[30px]">-->
+<!--                    <form>-->
+<!--                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">-->
+<!--                            <div><label>Feed_index <span class="text-danger">*</span></label><input-->
+<!--                                    class="block w-full inputStyle" type="text"></div>-->
+<!--                            <div><label>tag</label><input class="block w-full inputStyle" type="text"></div>-->
+<!--                            <div><label>time <span class="text-danger">*</span></label><input-->
+<!--                                    class="block w-full inputStyle" type="text"></div>-->
+<!--                            <div><label>Nurseing_feed_percentage <span class="text-danger">*</span></label><input-->
+<!--                                    class="block w-full inputStyle" type="text"></div>-->
+<!--                            <div><label>Phase_1_feed_percentage</label><input class="block w-full inputStyle" type="text"></div>-->
+<!--                            <div><label>Phase_2_feed_percentage</label><input class="block w-full inputStyle" type="text">-->
+<!--                            </div>-->
+<!--                            <div><label>Phase_3_feed_percentage </label><input class="block w-full inputStyle" type="text"></div>-->
+<!--                            <div><label><span class="text-[#1f1f1f]">Role</span><select-->
+<!--                                        class="form-select block w-full text-[#676767]">-->
+<!--                                        <option>Admin</option>-->
+<!--                                        <option>Client</option>-->
+<!--                                        <option>Employee</option>-->
+<!--                                    </select></label></div>-->
+<!--                            <div><label><span class="text-[#1f1f1f]">day_of_intake</span><select-->
+<!--                                        class="form-select block w-full text-[#676767]">-->
+<!--                                        <option>Global Technologies</option>-->
+<!--                                        <option>Delta Infotech</option>-->
+<!--                                    </select></label></div>-->
+<!--                            <div><label>Employee ID <span class="text-danger">*</span></label><input-->
+<!--                                    class="block w-full inputStyle" type="text"></div>-->
+<!--                        </div>-->
+<!--                        <div class="mt-10 text-center"><button class="submit-btn" id="feed-addSubmitBtn"-->
+<!--                                @click="modalOpen = false">Submit</button></div>-->
+<!--                    </form>-->
+<!--                </div>-->
             </div>
         </div>
     </div>
     <script src="../static/js/jquery-3.6.0.min.js"></script>
     <script src="../static/js/jquery.dataTables.min.js"></script>
     <script src="../static/js/app.js"></script>
-    <script src="../static/js/index/index.js"></script>
+    <script src="../static/js/index/base.js"></script>
+    <script src="../static/js/index/delete.js"></script>
+    <script src="../static/js/index/add.js"></script>
+    <script src="../static/js/index/update.js"></script>
 </body>
 
 </html>

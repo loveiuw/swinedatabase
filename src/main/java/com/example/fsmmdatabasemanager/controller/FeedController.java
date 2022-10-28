@@ -42,10 +42,10 @@ public class FeedController {
         return feedService.getFeedByPage(pageNum, perPageNum);
     }
 
-    @GetMapping("/insert")
+    @GetMapping("/add")
     public void insertFeed(HttpServletRequest request){
         Feed feed = new Feed();
-        feed.setFeedIndex(getMaxId());
+        feed.setFeedIndex(getMaxId() + 1);
         feed.setTag(request.getParameter("tag"));
         feed.setTime(Integer.parseInt(request.getParameter("time")));
         feed.setNurseingFeedPercentage(Float.parseFloat(request.getParameter("Nurseing_feed_percentage")));
