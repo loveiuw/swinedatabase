@@ -33,8 +33,12 @@ public class FeedController {
     }
 
     @GetMapping("/delete")
-    public void deleteFeed(HttpServletRequest request){
+    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
         feedService.delectFeed(Integer.parseInt(request.getParameter("Feed_index")));
+
+        ModelAndView modelAndView = new ModelAndView("feed");
+        modelAndView.addObject("feed_list", feedService.getFeedByPage(pageNum, perPageNum));
+        return modelAndView;
     }
 
     @PostMapping("/update")
@@ -57,7 +61,7 @@ public class FeedController {
     }
 
     @GetMapping("/add")
-    public void insertFeed(HttpServletRequest request){
+    public ModelAndView insertFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
         Feed feed = new Feed();
         feed.setFeedIndex(getMaxId() + 1);
         feed.setTag(request.getParameter("tag"));
@@ -68,6 +72,10 @@ public class FeedController {
         feed.setPhase3FeedPercentage(Float.parseFloat(request.getParameter("Phase_3_feed_percentage")));
         feed.setDayOfIntake(Float.parseFloat(request.getParameter("day_of_intake")));
         feedService.insertFeed(feed);
+
+        ModelAndView modelAndView = new ModelAndView("feed");
+        modelAndView.addObject("feed_list", feedService.getFeedByPage(pageNum, perPageNum));
+        return modelAndView;
     }
 
     @GetMapping("/getmaxid")
