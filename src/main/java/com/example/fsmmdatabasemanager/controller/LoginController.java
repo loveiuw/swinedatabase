@@ -11,12 +11,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/index")
 public class LoginController {
     @Resource
     AdminsService adminsService;
 
-    @GetMapping("/loginpage")
+    @GetMapping("")
     public AjaxResult loginPage(HttpServletRequest request){
         AjaxResult ajaxResult = new AjaxResult();
         String account = request.getParameter("account");
