@@ -20,9 +20,9 @@ public class MetabolismService {
         return metabolismRepository.selectList(null);
     }
 
-    public List<Metabolism> getMetabolismByPage(int pageNumber, int perPageNum){
+    public Page<Metabolism> getMetabolismByPage(int pageNumber, int perPageNum){
         Page<Metabolism> page = new Page<>(pageNumber, perPageNum);
         metabolismRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 }

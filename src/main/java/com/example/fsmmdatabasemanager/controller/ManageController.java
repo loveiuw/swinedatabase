@@ -34,17 +34,16 @@ public class ManageController {
     @ResponseBody
     @GetMapping("")
     public ModelAndView getAllData(){
-        ModelAndView modelAndView = new ModelAndView("Manage");
-        modelAndView.setViewName("Manage");
-        modelAndView.addObject("feed_list", feedService.getFeedByPage(1, 10));
-        modelAndView.addObject("feedingredient_list", feedIngredientService.getAllFeedIngredient());
-        modelAndView.addObject("feednutrition_list", feedNutritionService.getAllFeedNutrition());
-        modelAndView.addObject("metabolism_list", metabolismService.getAllMetabolism());
-        modelAndView.addObject("metabolismall_list", metabolismAllService.getAllMetabolismAll());
-        modelAndView.addObject("microbe_list", microbeService.getAllMicrobe());
-        modelAndView.addObject("microbeall_list", microbeAllService.getAllMicrobe());
-        modelAndView.addObject("swine_list", swineService.getAllSwine());
-        modelAndView.addObject("times_list", timesService.getAllTimes());
-        return modelAndView;
+        //        modelAndView.setViewName("Manage");
+//        modelAndView.addObject("feed_list", feedService.getFeedByPage(1, 10));
+//        modelAndView.addObject("feedingredient_list", feedIngredientService.getAllFeedIngredient());
+//        modelAndView.addObject("feednutrition_list", feedNutritionService.getAllFeedNutrition());
+//        modelAndView.addObject("metabolism_list", metabolismService.getAllMetabolism());
+//        modelAndView.addObject("metabolismall_list", metabolismAllService.getAllMetabolismAll());
+//        modelAndView.addObject("microbe_list", microbeService.getAllMicrobe());
+//        modelAndView.addObject("microbeall_list", microbeAllService.getAllMicrobe());
+//        modelAndView.addObject("swine_list", swineService.getAllSwine());
+//        modelAndView.addObject("times_list", timesService.getAllTimes());
+        return new ModelAndView("Manage");
     }
 }

@@ -18,9 +18,9 @@ public class FeedNutritionService {
         return feedNutritionRepository.selectList(null);
     }
 
-    public List<FeedNutrition> getFeedNutritionByPage(int pageNumber, int perPageNum){
+    public Page<FeedNutrition> getFeedNutritionByPage(int pageNumber, int perPageNum){
         Page<FeedNutrition> page = new Page<>(pageNumber, perPageNum);
         feedNutritionRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 }

@@ -28,7 +28,6 @@ public class FeedController {
         modelAndView.addObject("feed_list", feedList);
         modelAndView.addObject("numOfPages", numOfPages);
 
-        System.out.format("Get Feed!!! Lenth of data: %d\n", feedList.size());
         return modelAndView;
     }
 

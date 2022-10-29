@@ -20,9 +20,9 @@ public class TimesService {
         return timesRepository.selectList(null);
     }
 
-    public List<Times> getTimesByPage(int pageNumber, int perPageNum){
+    public Page<Times> getTimesByPage(int pageNumber, int perPageNum){
         Page<Times> page = new Page<>(pageNumber, perPageNum);
         timesRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 }
