@@ -20,7 +20,7 @@ public class FeedController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "30", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("feed");
         Page<Feed> page = feedService.getFeedByPage(pageNum, perPageNum);
         List<Feed> feedList = page.getRecords();

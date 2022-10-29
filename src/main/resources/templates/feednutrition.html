@@ -19,9 +19,15 @@
     <link rel="stylesheet" href="../static/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../static/css/tailwind-dist.css">
     <script src="/static/js/alpine.min.js" defer=""></script>
+    <style>
+        .pagebtn a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 
-<body class="font-CircularStd bg-body" x-data="{modalOpen:false}" @click.away="modalOpen=false" x-cloak="">
+<body class="font-CircularStd bg-body" x-data="{modalOpen:false,editmodalOpen:false,deletemodelOpen:false}" @click.away="modalOpen=false,editmodalOpen:false,deletemodelOpen:false" x-cloak="">
 <div class="main-wrapper">
     <header
             class="fixed left-0 right-0 top-0 bg-gradient-to-r from-[#ff9b44] to-[#fc6075] h-[60px] flex items-center border-b border-transparent shadow-header z-[500]">
@@ -124,8 +130,8 @@
                     </li>
                     <li>
                         <a href=""><i class="la la-cube"></i> <span>Feed_ingredient</span></a>
-                    </li>
-                    <li class="active">
+                    </li  class="active">
+                    <li>
                         <a href="javascript:;"><i class="la la-cog"></i> <span>Feed_nutrition</span></a>
                     </li>
                     <li class="submenu relative">
@@ -168,56 +174,54 @@
                     <div>
                         <h3
                                 class="text-pageTitle text-lg sm:text-2xl md:text-[26px] font-medium sm:mb-[5px] leading-[1.2]">
-                            Feed</h3>
+                            FeedNutrition</h3>
                         <ul class="hidden text-[14px] md:text-base font-medium sm:flex flex-wrap">
                             <li><a href="index.html" class="text-[#333333]">Datebase</a></li>
                             <li><span class="px-2">/</span></li>
-                            <li class="text-[#6c757d]">Feed</li>
+                            <li class="text-[#6c757d]">FeedNutrition</li>
                         </ul>
                     </div>
                     <div>
                         <a href="javascript:;" class="add-btn media-max-w-sm:text-sm media-max-w-xs:min-w-[inherit]"
-                           @click="modalOpen = ! modalOpen"><i class="fa fa-plus mr-[5px]"></i> Add Feed</a>
+                           @click="modalOpen = ! modalOpen"><i class="fa fa-plus mr-[5px]"></i> Add FeedNutrition</a>
                     </div>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4">
                 <div class="relative h-[50px]">
-                    <input id="usrName" name="usrName" type="text"
+                    <input id="Name" name="usrName" type="text"
                            class="peer h-[50px] rounded pt-[21px] px-3 pb-[6px] w-full border border-[#e3e3e3] text-dark placeholder-transparent focus:outline-none"
-                           placeholder="Name">
-                    <label for="usrName"
+                           placeholder="Item">
+                    <label for="Name"
                            class="absolute left-3 top-1 text-[#666666] opacity-100 text-xs transition-all peer-placeholder-shown:text-base peer-placeholder-shown:opacity-[0.4] peer-placeholder-shown:top-3 peer-focus:top-1 peer-focus:opacity-100 peer-focus:text-xs">index</label>
                 </div>
                 <div class="relative">
-                    <label class="absolute font-light text-xs px-3 text-[#666666] top-1">Tag</label>
-                    <select
-                            class="form-select h-[50px] appearance-none shadow-transparent focus:outline-none focus:shadow-transparent outline-none rounded w-full pt-5 pb-2 px-3">
-                        <option>TPF</option>
-                        <option selected="">DPF</option>
-                    </select>
-                </div>
-                <div class="relative">
-                    <label class="absolute font-light text-xs px-3 text-[#666666] top-1">Time</label>
-                    <select
-                            class="form-select h-[50px] appearance-none shadow-transparent focus:outline-none focus:shadow-transparent outline-none rounded w-full pt-5 pb-2 px-3">
-                        <option>0</option>
-                        <option>100</option>
-                    </select>
+                    <input id="nursingFeedNutrition" name="usrName" type="text"
+                           class="peer h-[50px] rounded pt-[21px] px-3 pb-[6px] w-full border border-[#e3e3e3] text-dark placeholder-transparent focus:outline-none"
+                           placeholder="nursingFeedNutrition">
+                    <label for="Name"
+                           class="absolute left-3 top-1 text-[#666666] opacity-100 text-xs transition-all peer-placeholder-shown:text-base peer-placeholder-shown:opacity-[0.4] peer-placeholder-shown:top-3 peer-focus:top-1 peer-focus:opacity-100 peer-focus:text-xs">index</label>
                 </div>
                 <div>
                     <a href="javascript:;" class="uppercase searchBtn">search</a>
+                </div>
+            </div>
+            <div>
+                <span>Total is 5 page current is ?</span>
+                <div>
+                    <button id="btnpre" class="pagebtn"><a href="?pageNum=1" onclick="go(-1); return false;">pre</a></button>
+                    <button id="btnnext" class="pagebtn"><a href="?pageNum=5" onclick="go(1); return false;">next</a></button>
                 </div>
             </div>
             <div class="whitespace-nowrap overflow-x-auto w-full tableStyle">
                 <table class="table stripe custom-table datatable bg-white w-full relative top-5 bottom-5">
                     <thead>
                     <tr class="text-left">
-                        <th>item</th>
-                        <th>nursingFeedNutrition</th>
-                        <th>phase1FeedNutrition</th>
-                        <th>phase2FeedNutrition</th>
-                        <th class="text-right">phase3FeedNutrition</th>
+                        <th>Item</th>
+                        <th>Nursing_feed_nutrition</th>
+                        <th>Phase_1_feed_nutrition</th>
+                        <th>Phase_2_feed_nutrition</th>
+                        <th class="text-right">Phase_3_feed_nutrition</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -227,130 +231,16 @@
                         <td th:text="${feednutrition?.phase1FeedNutrition}">phase1FeedNutrition</td>
                         <td th:text="${feednutrition?.phase2FeedNutrition}">phase2FeedNutrition</td>
                         <td th:text="${feednutrition?.phase3FeedNutrition}">phase3FeedNutrition</td>
-                        <td class="relative">
-                            <div class="text-right"
-                                 x-data="{cardAction:false, editmodalOpen:false, deletemodelOpen:false}"
-                                 @click.away="cardAction=false"><a href="javascript:;"
-                                                                   class="text-[#777777] text-lg inline-block"
-                                                                   @click="cardAction = ! cardAction"><i
-                                    class="material-icons">more_vert</i></a>
-                                <div class="absolute right-0 border border-blackOpacity rounded-[3px] bg-white min-w-[120px] z-50"
-                                     x-show="cardAction"><a
-                                        @click="editmodalOpen = ! editmodalOpen" href="javascript:;"><i
-                                        class="fa fa-pencil mr-[5px]"></i>Edit</a><a
-                                        class="block clear-both w-full text-left text-[13px] whitespace-nowrap px-[10px] py-[5px] hover:bg-[#e9ecef]"
-                                        @click="deletemodelOpen = ! deletemodelOpen" href="javascript:;"><i
-                                        class="fa fa-trash-o mr-[5px]"></i>Delete</a></div>
-                                <div x-show="deletemodelOpen"
-                                     class="fixed top-0 left-0 right-0 w-full text-left h-full outline-none overflow-x-hidden overflow-y-auto z-[9999]"
-                                     @click.prevent="cardAction=false" aria-labelledby="modal-title"
-                                     role="dialog" aria-modal="true">
-                                    <div class="flex items-center justify-center min-h-screen">
-                                        <div x-cloak="" @click="deletemodelOpen = false"
-                                             x-show="deletemodelOpen"
-                                             x-transition:enter="transition ease-out duration-300 transform"
-                                             x-transition:enter-start="opacity-0"
-                                             x-transition:enter-end="opacity-100"
-                                             x-transition:leave="transition ease-in duration-200 transform"
-                                             x-transition:leave-start="opacity-100"
-                                             x-transition:leave-end="opacity-0"
-                                             class="fixed inset-0 transition-opacity bg-blackOverlay bg-opacity-40"
-                                             aria-hidden="true"></div>
-                                        <div x-cloak="" x-show="deletemodelOpen"
-                                             x-transition:enter="transition ease-out duration-300 transform"
-                                             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                                             x-transition:leave="transition ease-in duration-200 transform"
-                                             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                                             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                             class="bg-white m-2 media-max-w-xs:w-full sm:mx-auto sm:my-7 sm:min-w-[500px] rounded-[10px] relative z-[9999] transition-all transform">
-                                            <div class="p-[30px] text-center">
-                                                <div class="mb-[30px]">
-                                                    <h5 class="text-[22px] capitalize mb-[10px]">Delete User
-                                                    </h5>
-                                                    <p class="text-[#929292] text-[15px]">Are you sure want to
-                                                        delete?</p>
-                                                </div>
-                                                <div class="grid grid-cols-2 gap-3"><a href="javascript:;"
-                                                                                       class="btnPrimary-outline">Delete</a><a
-                                                        href="javascript:;" class="btnPrimary-outline"
-                                                        @click="deletemodelOpen = false">Cancel</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div x-show="editmodalOpen"
-                                     class="fixed top-0 left-0 right-0 w-full text-left h-full outline-none overflow-x-hidden overflow-y-auto z-[9999]"
-                                     @click.prevent="cardAction=false" aria-labelledby="modal-title"
-                                     role="dialog" aria-modal="true">
-                                    <div class="sm:flex items-center justify-center min-h-screen">
-                                        <div x-cloak="" @click="editmodalOpen = false" x-show="editmodalOpen"
-                                             x-transition:enter="transition ease-out duration-300 transform"
-                                             x-transition:enter-start="opacity-0"
-                                             x-transition:enter-end="opacity-100"
-                                             x-transition:leave="transition ease-in duration-200 transform"
-                                             x-transition:leave-start="opacity-100"
-                                             x-transition:leave-end="opacity-0"
-                                             class="fixed inset-0 transition-opacity bg-blackOverlay bg-opacity-40"
-                                             aria-hidden="true"></div>
-                                        <div x-cloak="" x-show="editmodalOpen"
-                                             x-transition:enter="transition ease-out duration-300 transform"
-                                             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                                             x-transition:leave="transition ease-in duration-200 transform"
-                                             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                                             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                             class="bg-white m-2 sm:mx-auto sm:my-7 sm:max-w-[500px] media-min-w-md:min-w-[800px] rounded-[10px] relative z-[9999] transition-all transform">
-                                            <div class="pt-[30px] px-[30px] text-center">
-                                                <h5 class="text-[22px] capitalize">Edit User</h5><button
-                                                    type="button"
-                                                    class="bg-[#a0a0a0] w-5 h-5 rounded-full absolute top-[10px] right-[10px] text-white leading-5 z-50"
-                                                    @click="editmodalOpen = false"><span
-                                                    aria-hidden="true">&times;</span></button>
-                                            </div>
-                                            <div class="p-[30px]">
-                                                <form>
-                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                                        <div><label>Feed_index <span
-                                                                class="text-danger">*</span></label><input
-                                                                class="block w-full inputStyle" type="text"
-                                                                value="1" disabled id="feed-updateIndex"></div>
-                                                        <div><label><span
-                                                                class="text-[#1f1f1f]">tag</span><select id="feed-updateTag"
-                                                                                                         class="form-select block w-full text-[#676767]">
-                                                            <option selected="">TPF
-                                                            </option>
-                                                            <option>DPT</option>
-                                                        </select></label></div>
-                                                        <div><label>time</label><input id="feed-updateTime"
-                                                                                       class="block w-full inputStyle" type="text"
-                                                                                       value="0"></div>
-                                                        <div><label>Nurseing_feed_percentage <span
-                                                                class="text-danger">*</span></label><input id="feed-updateNurse"
-                                                                                                           class="block w-full inputStyle" type="text"
-                                                                                                           value="0"></div>
-                                                        <div><label>Phase_1_feed_percentage <span
-                                                                class="text-danger">*</span></label><input id="feed-updatePhase1"
-                                                                                                           class="block w-full inputStyle" type="text"
-                                                                                                           value="100"></div>
-                                                        <div><label>Phase_2_feed_percentage</label><input id="feed-updatePhase2"
-                                                                                                          class="block w-full inputStyle" type="text"
-                                                                                                          value="100"></div>
-                                                        <div><label>Phase_3_feed_percentage</label><input id="feed-updatePhase3"
-                                                                                                          class="block w-full inputStyle" type="text">
-                                                        </div>
-                                                        <div><label>day_of_intake </label><input id="feed-updateDayOfIntake"
-                                                                                                 class="block w-full inputStyle" type="text"
-                                                                                                 value="0"></div>
-                                                    </div>
-                                                    <div class="mt-10 text-center"><button class="submit-btn" id="feed-updateSubmitBtn"
-                                                    >Save</button></div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <td style="width: 50px;" th:onclick="feednutrition_updateBtn([[${feednutrition?.item}]],[[${feednutrition?.nursingFeedNutrition}]],[[${feednutrition?.phase1FeedNutrition]],[[${feednutrition?.phase2FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]])">
+                            <button @click="editmodalOpen = ! editmodalOpen">
+                                <i class="fa fa-edit"
+                                ></i> 修改
+                            </button>
+                        </td>
+                        <td style="width: 50px;">
+                            <button @click="deletemodelOpen = ! deletemodelOpen">
+                                <i class="fa fa-trash"></i> 删除
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -359,6 +249,86 @@
         </div>
     </div>
 </div>
+<!--    删除-->
+<div x-show="deletemodelOpen"
+     class="modal fixed top-0 left-0 right-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-[500]"
+     aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="sm:flex items-center justify-center min-h-screen">
+        <div x-cloak="" x-show="deletemodelOpen"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             class="bg-white m-2 media-max-w-xs:w-full sm:mx-auto sm:my-7 sm:min-w-[500px] rounded-[10px] relative z-[9999] transition-all transform">
+            <div class="p-[30px] text-center">
+                <div class="mb-[30px]">
+                    <h5 class="text-[22px] capitalize mb-[10px]">Delete User
+                    </h5>
+                    <p class="text-[#929292] text-[15px]">Are you sure want to
+                        delete?</p>
+                </div>
+                <div class="grid grid-cols-2 gap-3"><a href="javascript:;"
+                                                       class="btnPrimary-outline">Delete</a><a
+                        href="javascript:;" class="btnPrimary-outline"
+                        @click="deletemodelOpen = false">Cancel</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    修改-->
+<div x-show="editmodalOpen" id="edit-table"
+     class="modal fixed top-0 left-0 right-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-[500]"
+     aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="sm:flex items-center justify-center min-h-screen">
+        <div x-cloak="" @click="editmodalOpen = false" x-show="editmodalOpen"
+             x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+             class="fixed inset-0 transition-opacity bg-blackOverlay bg-opacity-40" aria-hidden="true"></div>
+        <div x-cloak="" x-show="editmodalOpen" x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave="transition ease-in duration-200 transform"
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+             class="bg-white m-2 sm:mx-auto sm:my-7 sm:max-w-[500px] media-min-w-md:min-w-[800px] rounded-[10px] relative z-[9999] transition-all transform">
+            <div class="pt-[30px] px-[30px] text-center">
+                <h5 class="text-[22px] capitalize">Exit Feed</h5><button type="button"
+                                                                         class="bg-[#a0a0a0] w-5 h-5 rounded-full absolute top-[10px] right-[10px] text-white leading-5 z-50"
+                                                                         @click="editmodalOpen = false"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="p-[30px]">
+                <form>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div><label>Item <span
+                                class="text-danger">*</span></label><input
+                                class="block w-full inputStyle" type="text"
+                                value="1" disabled id="feed-updateIndex"></div>
+                        <div><label>Nursing_feed_nutrition <span
+                                class="text-danger">*</span></label><input id="feednutrition-updateNurse"
+                                                                           class="block w-full inputStyle" type="text"
+                                                                           value="0"></div>
+                        <div><label>Phase_1_feed_nutrition</label><input id="feednutrition-updatePhase1"
+                                                                         class="block w-full inputStyle" type="text"
+                                                                         value="0"></div>
+                        <div><label>Phase_2_feed_nutrition</label><input id="feednutrition-updatePhase2"
+                                                                         class="block w-full inputStyle" type="text"
+                                                                         value="0"></div>
+                        <div><label>Phase_3_feed_nutrition</label><input id="feednutrition-updatePhase3"
+                                                                         class="block w-full inputStyle" type="text"
+                                                                         value="0"></div>
+                    </div>
+                    <div class="mt-10 text-center"><button class="submit-btn" id="feed-updateSubmitBtn"
+                    >Save</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    添加框-->
 <div x-show="modalOpen"
      class="fixed top-0 left-0 right-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-[500]"
      aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -381,42 +351,28 @@
                                                                         @click="modalOpen = false"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="p-[30px]">
-                <form>
+                <form id="feed-addForm">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div><label>Feed_index <span
-                                class="text-danger">*</span></label><input
-                                class="block w-full inputStyle" type="text"
-                                value="1" disabled id="feed-addIndex"></div>
-                        <div><label><span
-                                class="text-[#1f1f1f]">tag</span><select id="feed-addTag"
-                                                                         class="form-select block w-full text-[#676767]">
-                            <option selected="">TPF
-                            </option>
-                            <option>DPT</option>
-                        </select></label></div>
-                        <div><label>time</label><input id="feed-addTime"
+                        <div><label>Item</label><input id="feed-addTime"
                                                        class="block w-full inputStyle" type="text"
                                                        value="0"></div>
-                        <div><label>Nurseing_feed_percentage <span
-                                class="text-danger">*</span></label><input id="feed-addNurse"
+                        <div><label>Nursing_feed_nutrition <span
+                                class="text-danger">*</span></label><input id="feednutrition-addNutri"
                                                                            class="block w-full inputStyle" type="text"
                                                                            value="0"></div>
-                        <div><label>Phase_1_feed_percentage <span
-                                class="text-danger">*</span></label><input id="feed-addPhase1"
+                        <div><label>Phase_1_feed_nutrition <span
+                                class="text-danger">*</span></label><input id="feednutrition-addPhase1"
                                                                            class="block w-full inputStyle" type="text"
                                                                            value="100"></div>
-                        <div><label>Phase_2_feed_percentage</label><input id="feed-addPhase2"
+                        <div><label>Phase_2_feed_nutrition</label><input id="feednutrition-addPhase2"
                                                                           class="block w-full inputStyle" type="text"
                                                                           value="100"></div>
-                        <div><label>Phase_3_feed_percentage</label><input id="feed-addPhase3"
+                        <div><label>Phase_3_feed_nutrition</label><input id="feednutrition-addPhase3"
                                                                           class="block w-full inputStyle" type="text">
                         </div>
-                        <div><label>day_of_intake </label><input id="feed-addDayOfIntake"
-                                                                 class="block w-full inputStyle" type="text"
-                                                                 value="0"></div>
                     </div>
                     <div class="mt-10 text-center"><button class="submit-btn" id="feed-addSubmitBtn"
-                                                           @click="modalOpen = false">Submit</button></div>
+                    >Submit</button></div>
                 </form>
             </div>
         </div>
@@ -426,6 +382,9 @@
 <script src="../static/js/jquery.dataTables.min.js"></script>
 <script src="../static/js/app.js"></script>
 <script src="../static/js/index/base.js"></script>
+<script src="../static/js/index/delete.js"></script>
+<script src="../static/js/index/add.js"></script>
+<script src="../static/js/index/update.js"></script>
 </body>
 
 </html>
