@@ -230,7 +230,7 @@
                         <td th:text="${feednutrition?.phase1FeedNutrition}">phase1FeedNutrition</td>
                         <td th:text="${feednutrition?.phase2FeedNutrition}">phase2FeedNutrition</td>
                         <td th:text="${feednutrition?.phase3FeedNutrition}">phase3FeedNutrition</td>
-                        <td style="width: 50px;" th:onclick="feednutrition_updateBtn([[${feednutrition?.item}]],[[${feednutrition?.nursingFeedNutrition}]],[[${feednutrition?.phase1FeedNutrition]],[[${feednutrition?.phase2FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]])">
+                        <td style="width: 50px;" th:onclick="feednutrition_updateBtn([[${feednutrition?.item}]],[[${feednutrition?.nursingFeedNutrition}]],[[${feednutrition?.phase1FeedNutrition}]],[[${feednutrition?.phase2FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]])">
                             <button @click="editmodalOpen = ! editmodalOpen">
                                 <i class="fa fa-edit"
                                 ></i> 修改

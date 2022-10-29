@@ -1,10 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="Smarthr - Bootstrap Admin Template">
+    <meta name="keywords"
+          content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
+    <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+    <meta name="robots" content="noindex, nofollow">
+    <title>肠道微生物数据库</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/picture/微生物检验.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material%20Icons%20Outlined">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material%20Icons">
+    <link rel="stylesheet" href="../static/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/custom-forms.css">
+    <link rel="stylesheet" href="../static/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../static/css/tailwind-dist.css">
+    <script src="/static/js/alpine.min.js" defer=""></script>
+    <style>
+        .pagebtn a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
-<body>
 
+<body class="font-CircularStd bg-body" x-data="{modalOpen:false,editmodalOpen:false,deletemodelOpen:false}" @click.away="modalOpen=false,editmodalOpen:false,deletemodelOpen:false" x-cloak="">
+<div class="main-wrapper">
+    <header
+            class="fixed left-0 right-0 top-0 bg-gradient-to-r from-[#ff9b44] to-[#fc6075] h-[60px] flex items-center border-b border-transparent shadow-header z-[500]">
+        <div
+                class="logo media-max-w-md:max-w-full max-w-[230px] w-full media-max-w-md:absolute px-5 transition-all ease-in-out duration-[0.2s]">
+            <a href=""><img src="/static/picture/微生物检验.png" alt="logo"
+                            class="w-[40px] h-[40px] mx-auto"></a></div><a href="javascript:;"
+                                                                           class="media-max-w-md:hidden flex px-[10px]" id="toggle_btn"><span
+            class="bar-icon inline-block w-[21px]"><span
+            class="w-[21px] h-[2px] bg-white mb-[5px] block float-left"></span><span
+            class="w-[15px] h-[2px] bg-white mb-[5px] block float-left"></span><span
+            class="w-[21px] h-[2px] bg-white block float-left"></span></span></a>
+        <div class="px-5 media-max-w-lg:hidden">
+            <h3 class="text-[20px] font-normal text-white leading-[1.2]">Gut Mircrobiome Datebase</h3>
+        </div>
+
+        <a id="mobile_btn"
+           class="media-min-w-md:hidden px-5 w-[60px] h-[60px] leading-[60px] absolute top-0 left-0 text-white text-2xl"
+           href="#sidebar"><i class="fa fa-bars"></i></a>
+
+        <div class="ml-auto">
+            <ul class="hidden sm:flex items-center">
+                <!-- 页面上栏的搜索框 -->
+                <li>
+                    <div class="relative" x-data="{mobSearch:false}">
+                        <a href="javascript:void(0);"
+                           class="media-min-w-md:hidden inline-block h-[60px] leading-[60px] text-white text-xl sm:px-[10px] md:px-[15px] responsive-search"
+                           @click="mobSearch = ! mobSearch">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <form x-show="mobSearch" action="javascript:;"
+                              class="flex items-center w-[230px] absolute left-0 mt-[10px] z-50">
+                            <input
+                                    class="bg-white w-full h-[40px] py-[10px] pl-[15px] pr-[50px] border border-[#e3e3e3] rounded-[50px] text-[#333333] placeholder:text-blackOverlay outline-none focus:outline-none"
+                                    type="text" placeholder="Search here">
+                            <button class="flex absolute right-3" type="submit">
+                                <i class="fa fa-search text-[#333333]"></i>
+                            </button>
+                        </form>
+                        <form action="javascript:;"
+                              class=" media-max-w-md:hidden flex items-center w-[230px] relative">
+                            <input
+                                    class="bg-searchbg !border-transparent focus:ring-0 w-full h-[40px] py-[10px] pl-[15px] pr-[50px] rounded-[50px] text-white placeholder:text-whiteOpacity outline-none focus:outline-none"
+                                    type="text" placeholder="Search here">
+                            <button class="flex absolute right-3" type="submit">
+                                <i class="fa fa-search text-whiteOpacity"></i>
+                            </button>
+                        </form>
+                    </div>
+                </li>
+
+
+
+                <li class="relative" x-data="{profile:false}" @click.away="profile=false">
+                    <a href="javascript:;"
+                       class="sm:px-[10px] md:px-[15px] text-white flex items-center h-[60px] hover:bg-blackOpacity focus:bg-blackOpacity after:media-max-w-md:hidden after:content-['\f107'] after:font-FontAwesome after:pl-[5px] after:text-[20px] after:transition-all after:ease-in-out after:duration-[0.2s]"
+                       :class="{'after:rotate-180 after:pl-[0px] after:pr-[5px]':profile === true, 'after:rotate-0': profile === false}"
+                       @click="profile = ! profile">
+                        <div class="inline-block relative leading-[60px] h-[60px] media-min-w-md:mr-2"><img
+                                src="/static/picture/user.jpg"
+                                class="inline-block w-[30px] h-[30px] rounded-full" alt=""><span
+                                class="w-[10px] h-[10px] bg-statusOnline rounded-full border-2 border-white absolute right-0 bottom-3"></span>
+                        </div><span class="media-max-w-md:hidden text-[15px] leading-[60px]">Admin</span>
+                    </a>
+                    <div x-show="profile"
+                         class="py-2 bg-white absolute right-0 border border-dropdownBorder shadow rounded-sm min-w-[130px] max-h-[150px] overflow-y-auto z-50">
+                        <a href="index.html"
+                           class="px-3 py-1 flex items-center text-[13px] capitalize hover:text-dropdownColor hover:bg-dropdownhoverColor">logout</a>
+                    </div>
+                </li>
+            </ul>
+
+
+            <div class="block sm:hidden relative" x-data="{profile:false}" @click.away="profile=false">
+                <a href="javascript:;" class="text-white flex items-center h-[60px] px-5"
+                   @click="profile = ! profile"><i class="fa fa-ellipsis-v text-2xl"></i></a>
+                <div class="py-2 bg-white absolute right-0 media-max-w-xs:right-[18px] border border-dropdownBorder shadow rounded-sm min-w-[120px] max-h-[150px] overflow-y-auto z-50"
+                     x-show="profile">
+                    <a class="px-3 py-1 flex items-center text-[13px] capitalize hover:text-dropdownColor hover:bg-dropdownhoverColor"
+                       href="index.html">Logout</a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <div class="sidebar bg-sidebar media-max-w-md:-ml-[225px] media-max-w-md:w-[225px] transition-all ease-in-out duration-[0.2s] w-[230px] fixed top-[60px] bottom-0 left-0 py-[10px] z-[401]"
+         id="sidebar">
+        <div class="h-full pb-5 scrollbar-thin scrollbar-thumb-scrollbar scroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <!-- 表的左侧栏 -->
+                    <li class="menu-title">
+                        <span>Tables</span>
+                    </li>
+                    <li>
+                        <a href="/table/feed"><i class="la la-bell"></i> <span>Feed</span></a>
+                    </li>
+                    <li>
+                        <a href="/table/feedingredient"><i class="la la-cube"></i> <span>Feed_ingredient</span></a>
+                    </li>
+                    <li>
+                        <a href="/table/feednutrition"><i class="la la-cog"></i> <span>Feed_nutrition</span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/metabolism" ><i class="la la-dashboard"></i> <span> Metabolism </span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/metabolismall"><i class="la la-key"></i> <span> Metabolism_all</span></a>
+
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/microbe"><i class="la la-table"></i> <span> Microbe </span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/microbe"><i class="la la-cube"></i> <span> Microbe_all </span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/swine"><i class="la la-table"></i> <span> Swine </span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/times" class="active"><i class="la la-table"></i> <span> Times </span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="javascript:;"><i class="la la-exclamation-triangle"></i> <span> Error Pages </span>
+                            <span class="absolute right-[10px]"><span
+                                    class="material-icons text-lg menu-arrow transition-all ease-in-out duration-[0.2s]">navigate_next</span></span></a>
+                        <ul style="display: none;">
+                            <li><a href="error-404.html">404 Error </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧栏 -->
+    <div class="page-wrapper flex-1 relative left-0 pt-[60px] media-min-w-md:ml-[230px]">
+        <div class="p-[15px] sm:p-[30px]">
+            <div class="page-header mb-[1.875rem]">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3
+                                class="text-pageTitle text-lg sm:text-2xl md:text-[26px] font-medium sm:mb-[5px] leading-[1.2]">
+                            Times</h3>
+                        <ul class="hidden text-[14px] md:text-base font-medium sm:flex flex-wrap">
+                            <li><a href="index.html" class="text-[#333333]">Datebase</a></li>
+                            <li><span class="px-2">/</span></li>
+                            <li class="text-[#6c757d]">Times</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <a href="javascript:;" class="add-btn media-max-w-sm:text-sm media-max-w-xs:min-w-[inherit]"
+                           @click="modalOpen = ! modalOpen"><i class="fa fa-plus mr-[5px]"></i> Add Times</a>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4">
+                <div class="relative h-[50px]">
+                    <input id="Name" name="usrName" type="text"
+                           class="peer h-[50px] rounded pt-[21px] px-3 pb-[6px] w-full border border-[#e3e3e3] text-dark placeholder-transparent focus:outline-none"
+                           placeholder="Item">
+                    <label for="Name"
+                           class="absolute left-3 top-1 text-[#666666] opacity-100 text-xs transition-all peer-placeholder-shown:text-base peer-placeholder-shown:opacity-[0.4] peer-placeholder-shown:top-3 peer-focus:top-1 peer-focus:opacity-100 peer-focus:text-xs">index</label>
+                </div>
+                <div class="relative">
+                    <input id="nursingFeedNutrition" name="usrName" type="text"
+                           class="peer h-[50px] rounded pt-[21px] px-3 pb-[6px] w-full border border-[#e3e3e3] text-dark placeholder-transparent focus:outline-none"
+                           placeholder="nursingFeedNutrition">
+                    <label for="Name"
+                           class="absolute left-3 top-1 text-[#666666] opacity-100 text-xs transition-all peer-placeholder-shown:text-base peer-placeholder-shown:opacity-[0.4] peer-placeholder-shown:top-3 peer-focus:top-1 peer-focus:opacity-100 peer-focus:text-xs">index</label>
+                </div>
+                <div>
+                    <a href="javascript:;" class="uppercase searchBtn">search</a>
+                </div>
+            </div>
+            <div>
+                <span>Total is 5 page current is ?</span>
+                <div>
+                    <button id="btnpre" class="pagebtn"><a href="?pageNum=1" onclick="go(-1); return false;">pre</a></button>
+                    <button id="btnnext" class="pagebtn"><a href="?pageNum=5" onclick="go(1); return false;">next</a></button>
+                </div>
+            </div>
+            <div class="whitespace-nowrap overflow-x-auto w-full tableStyle">
+                <table class="table stripe custom-table datatable bg-white w-full relative top-5 bottom-5">
+                    <thead>
+                    <tr class="text-left">
+                        <th>days</th>
+                        <th class="text-right">phase</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="time: ${times_list}">
+                        <td th:text="${time?.days}">days</td>
+                        <td th:text="${time?.phase}">phase</td>
+                        <td style="width: 50px;" th:onclick="time_updateBtn([[${time?.days}]],[[${time?.phase}]])">
+                            <button @click="editmodalOpen = ! editmodalOpen">
+                                <i class="fa fa-edit"
+                                ></i> 修改
+                            </button>
+                        </td>
+                        <td style="width: 50px;">
+                            <button @click="deletemodelOpen = ! deletemodelOpen">
+                                <i class="fa fa-trash"></i> 删除
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/jquery-3.6.0.min.js"></script>
+<script src="../static/js/jquery.dataTables.min.js"></script>
+<script src="../static/js/app.js"></script>
+<script src="../static/js/index/base.js"></script>
+<script src="../static/js/index/delete.js"></script>
+<script src="../static/js/index/add.js"></script>
+<script src="../static/js/index/update.js"></script>
 </body>
+
 </html>
