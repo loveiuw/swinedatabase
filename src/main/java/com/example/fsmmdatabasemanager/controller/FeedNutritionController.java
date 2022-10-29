@@ -23,7 +23,7 @@ public class FeedNutritionController {
     @GetMapping("")
     @ResponseBody
     public ModelAndView feedNutritionIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
-        ModelAndView modelAndView = new ModelAndView("feedNutrition");
+        ModelAndView modelAndView = new ModelAndView("feednutrition");
         Page<FeedNutrition> page = feedNutritionService.getFeedNutritionByPage(pageNum, perPageNum);
         List<FeedNutrition> feedNutritionList = page.getRecords();
         long numOfPages = page.getPages();

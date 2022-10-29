@@ -1,8 +1,8 @@
 package com.example.fsmmdatabasemanager.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.fsmmdatabasemanager.entity.Times;
-import com.example.fsmmdatabasemanager.service.TimesService;
+import com.example.fsmmdatabasemanager.entity.MicrobeAll;
+import com.example.fsmmdatabasemanager.service.MicrobeAllService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,20 +14,19 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("/table/times")
-
-public class TimesController {
+@RequestMapping("/table/microbeall")
+public class MicrobeAllController {
     @Resource
-    TimesService timesService;
+    MicrobeAllService microbeAllService;
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView timesIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
-        ModelAndView modelAndView = new ModelAndView("times");
-        Page<Times> page = timesService.getTimesByPage(pageNum, perPageNum);
-        List<Times> timesList = page.getRecords();
+    public ModelAndView microbeAllIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+        ModelAndView modelAndView = new ModelAndView("microbeall");
+        Page<MicrobeAll> page = microbeAllService.getMicrobeAllByPage(pageNum, perPageNum);
+        List<MicrobeAll> microbeAllList = page.getRecords();
         long numOfPages = page.getPages();
-        modelAndView.addObject("times_list", timesList);
+        modelAndView.addObject("microbe_list", microbeAllList);
         modelAndView.addObject("numOfPages", numOfPages);
 
         return modelAndView;
