@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.xml.bind.ValidationEvent;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -21,7 +21,7 @@ public class MetabolismAllController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView MetabolismAllIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView MetabolismAllIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("metabolismall");
         Page<MetabolismAll> page = metabolismAllService.getMetabolismAllByPage(pageNum, perPageNum);
         List<MetabolismAll> metabolismAllList = page.getRecords();

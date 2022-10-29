@@ -22,7 +22,7 @@ public class FeedNutritionController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView feedNutritionIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView feedNutritionIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("feednutrition");
         Page<FeedNutrition> page = feedNutritionService.getFeedNutritionByPage(pageNum, perPageNum);
         List<FeedNutrition> feedNutritionList = page.getRecords();
@@ -31,5 +31,12 @@ public class FeedNutritionController {
         modelAndView.addObject("numOfPages", numOfPages);
 
         return modelAndView;
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public List<FeedNutrition> getfeedNutritionData(){
+        Page<FeedNutrition> page = feedNutritionService.getFeedNutritionByPage(1, 20);
+        return page.getRecords();
     }
 }

@@ -20,7 +20,7 @@ public class FeedController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "30", required = false)int perPageNum){
+    public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("feed");
         Page<Feed> page = feedService.getFeedByPage(pageNum, perPageNum);
         List<Feed> feedList = page.getRecords();
@@ -32,7 +32,7 @@ public class FeedController {
     }
 
     @GetMapping("/delete")
-    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "30", required = false)int perPageNum){
+    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         feedService.delectFeed(Integer.parseInt(request.getParameter("Feed_index")));
 
         ModelAndView modelAndView = new ModelAndView("feed");
@@ -41,7 +41,7 @@ public class FeedController {
     }
 
     @PostMapping("/update")
-    public ModelAndView updateFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView updateFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         Feed feed = new Feed();
         feed.setFeedIndex(Integer.parseInt(request.getParameter("Feed_index")));
         feed.setTag(request.getParameter("tag"));

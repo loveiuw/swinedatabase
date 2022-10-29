@@ -23,7 +23,7 @@ public class SwineController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView swineIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView swineIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("swine");
         Page<Swine> page = swineService.getSwineByPage(pageNum, perPageNum);
         List<Swine> swineList = page.getRecords();

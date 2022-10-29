@@ -22,7 +22,7 @@ public class TimesController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView timesIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView timesIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("times");
         Page<Times> page = timesService.getTimesByPage(pageNum, perPageNum);
         List<Times> timesList = page.getRecords();

@@ -22,7 +22,7 @@ public class MicrobeController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView microbeIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView microbeIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("microbe");
         Page<Microbe> page = microbeService.getMicrobeByPage(pageNum, perPageNum);
         List<Microbe> microbeList = page.getRecords();
