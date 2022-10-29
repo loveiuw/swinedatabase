@@ -20,9 +20,9 @@ public class MicrobeService {
         return MicrobeRepository.selectList(null);
     }
 
-    public List<Microbe> getMicrobeByPage(int pageNumber, int perPageNum){
+    public Page<Microbe> getMicrobeByPage(int pageNumber, int perPageNum){
         Page<Microbe> page = new Page<>(pageNumber, perPageNum);
         MicrobeRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 }

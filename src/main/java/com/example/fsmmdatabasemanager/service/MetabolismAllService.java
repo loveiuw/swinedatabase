@@ -14,13 +14,15 @@ public class MetabolismAllService {
     @Autowired
     MetabolismAllRepository metabolismAllRepository;
 
-    public List<MetabolismAll> getAllMetabolismAll(){
-        return metabolismAllRepository.selectList(null);
+    public Page<MetabolismAll> getMetabolismAllByPage(int pageNum, int perPageNum){
+        Page<MetabolismAll> page = new Page<>(pageNum, perPageNum, false);
+        metabolismAllRepository.selectPage(page, null);
+        return page;
     }
 
-    public List<MetabolismAll> getFeedByPage(int pageNumber, int perPageNum){
+    public Page<MetabolismAll> getFeedByPage(int pageNumber, int perPageNum){
         Page<MetabolismAll> page = new Page<>(pageNumber, perPageNum);
         metabolismAllRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 }

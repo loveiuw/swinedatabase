@@ -20,10 +20,10 @@ public class FeedIngredientService {
         return feedIngredientRepository.selectList(null);
     }
 
-    public List<FeedIngredient> getFeedIngredientByPage(int pageNumber, int perPageNum){
+    public Page<FeedIngredient> getFeedIngredientByPage(int pageNumber, int perPageNum){
         Page<FeedIngredient> page = new Page<>(pageNumber, perPageNum);
         feedIngredientRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 
     public void deleteFeedIngredient(int id){

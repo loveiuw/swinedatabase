@@ -20,9 +20,9 @@ public class SwineService {
         return swineRepository.selectList(null);
     }
 
-    public List<Swine> getSwineByPage(int pageNumber, int perPageNum){
+    public Page<Swine> getSwineByPage(int pageNumber, int perPageNum){
         Page<Swine> page = new Page<>(pageNumber, perPageNum);
         swineRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 }

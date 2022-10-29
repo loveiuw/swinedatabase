@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,11 +21,18 @@ public class FeedIngredientController {
     @Resource
     FeedIngredientService feedIngredientService;
 
-   @GetMapping("/getbypage")
-   public List<FeedIngredient> getFeedIngredientBypage(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
-       Page<Feed> page = new Page<>(pageNum, perPageNum);
-       return feedIngredientService.getFeedIngredientByPage(pageNum, perPageNum);
-   }
+    @GetMapping("")
+    @ResponseBody
+    public ModelAndView feedIngredientIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+        ModelAndView modelAndView = new ModelAndView("feedIngredient");
+        Page<FeedIngredient> page = feedIngredientService.getFeedIngredientByPage(pageNum, perPageNum);
+        List<FeedIngredient> feedIngredientList = page.getRecords();
+        long numOfPages = page.getPages();
+        modelAndView.addObject("feedIngredient_list", feedIngredientList);
+        modelAndView.addObject("numOfPages", numOfPages);
+
+        return modelAndView;
+    }
 
    @GetMapping("/delete")
     public void deleteFeedIngredientBy(HttpServletRequest request){
