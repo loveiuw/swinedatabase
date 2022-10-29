@@ -18,7 +18,7 @@ public class FeedController {
     @Autowired
     FeedService feedService;
 
-    @GetMapping("/")
+    @GetMapping("")
     @ResponseBody
     public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("feed");
