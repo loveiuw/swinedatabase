@@ -33,7 +33,7 @@ public class FeedController {
     }
 
     @GetMapping("/delete")
-    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "30", required = false)int perPageNum){
         feedService.delectFeed(Integer.parseInt(request.getParameter("Feed_index")));
 
         ModelAndView modelAndView = new ModelAndView("feed");

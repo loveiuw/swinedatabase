@@ -99,13 +99,36 @@ $.ajax({
     }
 })
 }
+// 页面查找
+var currentpage = 1;
+var maxpage = 3;
+function go(d){
+    setupPage(d);
+    history.pushState(currentpage, document.title,'?pageNum='+ currentpage)
+}
+onpopstate = function(event){
+    setupPage(event.state)
+}
+function setupPage(page){
+    currentpage += page;
+    if(currentpage===maxpage+1){
+        currentpage += -1;
+        document.getElementById("btnnext").disabled=true;
 
+    }else if(currentpage===0){
+        currentpage += 1;
+        document.getElementById("btnpre").disabled=true;
+    }else{
+        document.getElementById("btnpre").disabled=false;
+        document.getElementById("btnnext").disabled=false;
+    }
+}
 // 点击修改按钮
 function feed_updateBtn(index, tag, time, nurse, phase1, phase2, phase3, dayofintake) {
 // 传递数据到弹出框
-alert("hahha")
-// $('#feed-modal-form-update').modal = true
-$('#feed-updateId').val(index)
+// alert("hahha")
+
+$('#feed-updateIndex').val(index)
 $("#feed-updateTag option:selected").val()
 $('#feed-updateTag').val(tag)
 $('#feed-updateTime').val(time)
@@ -114,6 +137,7 @@ $('#feed-updatePhase1').val(phase1)
 $('#feed-updatePhase2').val(phase2)
 $('#feed-updatePhase3').val(phase3)
 $('#feed-updateDayOfIntake').val(dayofintake)
+    // alert("赋值成功")
 }
 // 管理员 修改提交 <!--管理员修改弹出框：编号，账号，密码，姓名，电话-->
 $('#admin-updateSubmitBtn').click(function () {

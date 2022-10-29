@@ -39,7 +39,7 @@ $('#feed-addSubmitBtn').click(function () {
             },
             success: function (data) {
                 // 关闭修改框
-                $('#user-modal-form-add').modal('hide')
+                // $('#data-table').modal('hide')
                 // 清空modal框里上一次的数据
                 document.getElementById("feed-addForm").reset()
                 // 局部刷新
@@ -51,4 +51,8 @@ $('#feed-addSubmitBtn').click(function () {
             }
         })
     }
+})
+$('#btn').click(function () {
+    alert('hahhahhaa')
+    $("data-table").attr("x-data.editmodalOpen", true);
 })
