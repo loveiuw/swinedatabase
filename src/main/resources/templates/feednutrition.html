@@ -124,34 +124,33 @@
                     <li class="menu-title">
                         <span>Tables</span>
                     </li>
+                    <li>
+                        <a href="/table/feed"><i class="la la-bell"></i> <span>Feed</span></a>
+                    </li>
+                    <li>
+                        <a href="/table/feedingredient"><i class="la la-cube"></i> <span>Feed_ingredient</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="/table/feednutrition"><i class="la la-cog"></i> <span>Feed_nutrition</span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/metabolism"><i class="la la-dashboard"></i> <span> Metabolism </span></a>
+                    </li>
+                    <li class="submenu relative">
+                        <a href="/table/metabolismall"><i class="la la-key"></i> <span> Metabolism_all</span></a>
 
-                    <li>
-                        <a href="javascript:;"><i class="la la-bell"></i> <span>Feed</span></a>
-                    </li>
-                    <li>
-                        <a href=""><i class="la la-cube"></i> <span>Feed_ingredient</span></a>
-                    </li  class="active">
-                    <li>
-                        <a href="javascript:;"><i class="la la-cog"></i> <span>Feed_nutrition</span></a>
                     </li>
                     <li class="submenu relative">
-                        <a href="javascript:;"><i class="la la-dashboard"></i> <span> Metabolism </span></a>
+                        <a href="/table/microbe"><i class="la la-table"></i> <span> Microbe </span></a>
                     </li>
                     <li class="submenu relative">
-                        <a href="javascript:;"><i class="la la-key"></i> <span> Metabolism_all</span></a>
-
+                        <a href="/table/microbe"><i class="la la-cube"></i> <span> Microbe_all </span></a>
                     </li>
                     <li class="submenu relative">
-                        <a href="javascript:;"><i class="la la-table"></i> <span> Microbe </span></a>
+                        <a href="/table/swine"><i class="la la-table"></i> <span> Swine </span></a>
                     </li>
                     <li class="submenu relative">
-                        <a href="javascript:;"><i class="la la-cube"></i> <span> Microbe_all </span></a>
-                    </li>
-                    <li class="submenu relative">
-                        <a href="javascript:;"><i class="la la-table"></i> <span> Swine </span></a>
-                    </li>
-                    <li class="submenu relative">
-                        <a href="javascript:;"><i class="la la-table"></i> <span> Times </span></a>
+                        <a href="/table/times"><i class="la la-table"></i> <span> Times </span></a>
                     </li>
                     <li class="submenu relative">
                         <a href="javascript:;"><i class="la la-exclamation-triangle"></i> <span> Error Pages </span>
@@ -225,13 +224,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="feednutrition: ${feednutrition_list}">
+                    <tr th:each="feednutrition: ${feedNutrition_list}">
                         <td th:text="${feednutrition?.item}">item</td>
                         <td th:text="${feednutrition?.nursingFeedNutrition}">nursingFeedNutrition</td>
                         <td th:text="${feednutrition?.phase1FeedNutrition}">phase1FeedNutrition</td>
                         <td th:text="${feednutrition?.phase2FeedNutrition}">phase2FeedNutrition</td>
                         <td th:text="${feednutrition?.phase3FeedNutrition}">phase3FeedNutrition</td>
-                        <td style="width: 50px;" th:onclick="feednutrition_updateBtn([[${feednutrition?.item}]],[[${feednutrition?.nursingFeedNutrition}]],[[${feednutrition?.phase1FeedNutrition]],[[${feednutrition?.phase2FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]])">
+                        <td style="width: 50px;" th:onclick="feednutrition_updateBtn([[${feednutrition?.item}]],[[${feednutrition?.nursingFeedNutrition}]],[[${feednutrition?.phase1FeedNutrition]],[[${feednutrition?.phase2FeedNutrition}]],[[${feednutrition?.phase3FeedNutrition}]])">
                             <button @click="editmodalOpen = ! editmodalOpen">
                                 <i class="fa fa-edit"
                                 ></i> 修改
