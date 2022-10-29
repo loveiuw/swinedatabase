@@ -17,6 +17,11 @@ public class LoginController {
     AdminsService adminsService;
 
     @GetMapping("")
+    public String index(){
+        return "index";
+    }
+
+    @GetMapping("/login")
     public AjaxResult loginPage(HttpServletRequest request){
         AjaxResult ajaxResult = new AjaxResult();
         String account = request.getParameter("account");
