@@ -39,7 +39,7 @@ public class IndexController {
     @ResponseBody
     public ModelAndView manageIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("feed");
-        List<Feed> feedList = feedService.getFeedByPage(pageNum, perPageNum);
+        List<Feed> feedList = feedService.getFeedByPage(pageNum, perPageNum).getRecords();
         List<FeedIngredient> feedIngredientList = feedIngredientService.getFeedIngredientByPage(pageNum, perPageNum);
         List<FeedNutrition> feedNutritionList = feedNutritionService.getFeedNutritionByPage(pageNum, perPageNum);
         modelAndView.addObject("feed_list", feedList);

@@ -26,10 +26,10 @@ public class FeedService {
         return feedRepository.selectByMap(new HashMap<>());
     }
 
-    public List<Feed> getFeedByPage(int pageNumber, int perPageNum){
+    public Page<Feed> getFeedByPage(int pageNumber, int perPageNum){
         Page<Feed> page = new Page<>(pageNumber, perPageNum, false);
         feedRepository.selectPage(page, null);
-        return page.getRecords();
+        return page;
     }
 
     public List<Feed> selectFeedByRange(String column, float l, float r){
