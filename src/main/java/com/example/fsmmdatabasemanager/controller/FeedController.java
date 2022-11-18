@@ -20,7 +20,7 @@ public class FeedController {
 
     @GetMapping("")
     @ResponseBody
-    public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
+    public ModelAndView feedIndex(@RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "100", required = false)int perPageNum){
         ModelAndView modelAndView = new ModelAndView("feed");
         Page<Feed> page = feedService.getFeedByPage(pageNum, perPageNum);
         List<Feed> feedList = page.getRecords();
@@ -31,17 +31,17 @@ public class FeedController {
         return modelAndView;
     }
 
-    @GetMapping("/delete")
-    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
+    @PostMapping(value = "/delete")
+    public ModelAndView deleteFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "100", required = false)int perPageNum){
+        System.out.println(request.getParameter("Feed_index"));
         feedService.delectFeed(Integer.parseInt(request.getParameter("Feed_index")));
-
         ModelAndView modelAndView = new ModelAndView("feed");
         modelAndView.addObject("feed_list", feedService.getFeedByPage(pageNum, perPageNum));
         return modelAndView;
     }
 
     @PostMapping("/update")
-    public ModelAndView updateFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "50", required = false)int perPageNum){
+    public ModelAndView updateFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "100", required = false)int perPageNum){
         Feed feed = new Feed();
         feed.setFeedIndex(Integer.parseInt(request.getParameter("Feed_index")));
         feed.setTag(request.getParameter("tag"));
@@ -58,9 +58,18 @@ public class FeedController {
         modelAndView.addObject("numOfPage", page.getPages());
         return modelAndView;
     }
-
-    @GetMapping("/add")
-    public ModelAndView insertFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "10", required = false)int perPageNum){
+//
+//    @PostMapping(value = "/insert")
+//    public ModelAndView insertUser(HttpServletRequest http) {
+//        serviceUser.insertUser(http.getParameter("account"), http.getParameter("password"),
+//                http.getParameter("name"), http.getParameter("sex"),
+//                http.getParameter("birth"), http.getParameter("phone"));
+//        ModelAndView view = new ModelAndView("newManage::user-userTable");
+//        view.addObject("user_list", serviceUser.selectAllUser());
+//        return view;
+//    }
+    @PostMapping("/add")
+    public ModelAndView insertFeed(HttpServletRequest request, @RequestParam(defaultValue = "1", required = false)int pageNum, @RequestParam(defaultValue = "100", required = false)int perPageNum){
         Feed feed = new Feed();
         feed.setFeedIndex(getMaxId() + 1);
         feed.setTag(request.getParameter("tag"));

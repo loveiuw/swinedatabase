@@ -48,9 +48,7 @@ public class FeedService {
     }
 
     public int getMaxFeedId(){
-        QueryWrapper<Feed> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("max(Feed_index)");
-        return feedRepository.selectList(queryWrapper).get(0).getFeedIndex();
+        return feedRepository.getMaxFeedID();
     }
 
 }

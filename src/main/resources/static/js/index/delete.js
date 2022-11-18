@@ -1,12 +1,13 @@
 function feed_deleteBtn(index) {
     $.ajax({
         type: 'POST',
-        url: '/feed/delete',
+        url: '/table/feed/delete',
         data: {
             'Feed_index': index
         },
         success: function (data) {
-            $('#feed-feedTable').html(data)
+            $('#table').html(data)
+            $('#delete-table').css('display','none')
         },
         error: function (err) {
             console.log(err)

@@ -12,4 +12,7 @@ import java.util.List;
 public interface FeedRepository extends BaseMapper<Feed> {
     @Select("select * from feed where ${column} >= #{l} and ${column} <= #{r}")
     List<Feed> selectFeedByRange(String column, float l, float r);
+
+    @Select("select max(feed_index) from feed")
+    int getMaxFeedID();
 }

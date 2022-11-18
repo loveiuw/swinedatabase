@@ -1,7 +1,7 @@
 // feed增加提交
 $('#feed-addSubmitBtn').click(function () {
     //变量
-    var feedIndex = $('#feed-addIndex').val()
+    // var feedIndex = $('#feed-addIndex').val()
     var tag = $('#feed-addTag option:selected').val()
     var time = $('#feed-addTime').val()
     var nurse = $('#feed-addNurse').val()
@@ -39,11 +39,12 @@ $('#feed-addSubmitBtn').click(function () {
             },
             success: function (data) {
                 // 关闭修改框
-                // $('#data-table').modal('hide')
+                alert('删除成功！')
+                $('#add-form').css('display','none')
                 // 清空modal框里上一次的数据
-                document.getElementById("feed-addForm").reset()
+                // document.getElementById("feed-addForm").reset()
                 // 局部刷新
-                $('#user-userTable').html(data)
+                $('#table').html(data)
             },
             error: function (err) {
                 console.log(err)

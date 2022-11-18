@@ -1,3 +1,19 @@
+function gopage(num){
+    $.ajax({
+        type: 'POST',
+        url: '/feed',
+        data: {
+            'id': id
+        },
+        success: function (data) {
+            $('#feed-feedTable').html(data)
+        },
+        error: function (err) {
+            console.log(err)
+            alert("操作失败，请刷新重新尝试！")
+        }
+    })
+}
 function deleteBtn(id) {
 $.ajax({
     type: 'POST',

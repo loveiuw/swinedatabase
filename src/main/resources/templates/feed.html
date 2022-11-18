@@ -216,13 +216,15 @@
                 </div>
                 <div>
 <!--                    <span>Total is 5 page current is ?</span>-->
-                    <div>
-                        <button id="btnpre" class="pagebtn"><a href="?pageNum=1" onclick="go(-1); return false;">pre</a></button>
-                        <button id="btnnext" class="pagebtn"><a href="?pageNum=5" onclick="go(1); return false;">next</a></button>
-                    </div>
+<!--                    <div>-->
+<!--                        <button id="btnpre" class="pagebtn" onclick="gopage(-1); return false;">pre</button>-->
+<!--                        <button id="btnnext" class="pagebtn" onclick="gopage(1); return false;">next</button>-->
+<!--&lt;!&ndash;                        <button id="btnpre" class="pagebtn"><a href="?pageNum=1" onclick="go(-1); return false;">pre</a></button>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <button id="btnnext" class="pagebtn"><a href="?pageNum=5" onclick="go(1); return false;">next</a></button>&ndash;&gt;-->
+<!--                    </div>-->
                 </div>
                 <div class="whitespace-nowrap overflow-x-auto w-full tableStyle">
-                    <table class="table stripe custom-table datatable bg-white w-full relative top-5 bottom-5">
+                    <table class="table stripe custom-table datatable bg-white w-full relative top-5 bottom-5" id="table">
                         <thead>
                             <tr class="text-left">
                                 <th>Feed_index</th>
@@ -264,7 +266,7 @@
         </div>
     </div>
 <!--    删除-->
-    <div x-show="deletemodelOpen"
+    <div x-show="deletemodelOpen" id="delete-table"
          class="modal fixed top-0 left-0 right-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-[500]"
          aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="sm:flex items-center justify-center min-h-screen">
@@ -283,9 +285,9 @@
                         <p class="text-[#929292] text-[15px]">Are you sure want to
                             delete?</p>
                     </div>
-                    <div class="grid grid-cols-2 gap-3"><a href="javascript:;"
-                                                           class="btnPrimary-outline">Delete</a><a
-                            href="javascript:;" class="btnPrimary-outline"
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="javascript:;" class="btnPrimary-outline"  th:onclick="|feedDeleteBtn(${feed?.feedIndex})|">Delete</a>
+                        <a href="javascript:;" class="btnPrimary-outline"
                             @click="deletemodelOpen = false">Cancel</a></div>
                 </div>
             </div>
@@ -357,6 +359,7 @@
     </div>
 
 <!--    添加框-->
+    <div id="add-form">
     <div x-show="modalOpen"
         class="fixed top-0 left-0 right-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-[500]"
         aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -390,7 +393,7 @@
                             </select></label></div>
                             <div><label>time</label><input id="feed-addTime"
                                                            class="block w-full inputStyle" type="text"
-                                                           value="0"></div>
+                                                           value="90"></div>
                             <div><label>Nurseing_feed_percentage <span
                                     class="text-danger">*</span></label><input id="feed-addNurse"
                                                                                class="block w-full inputStyle" type="text"
@@ -416,13 +419,35 @@
             </div>
         </div>
     </div>
+    </div>
     <script src="../static/js/jquery-3.6.0.min.js"></script>
     <script src="../static/js/jquery.dataTables.min.js"></script>
     <script src="../static/js/app.js"></script>
     <script src="../static/js/index/base.js"></script>
-    <script src="../static/js/index/delete.js"></script>
+<!--    <script src="../static/js/index/delete.js"></script>-->
     <script src="../static/js/index/add.js"></script>
     <script src="../static/js/index/update.js"></script>
+    <script>
+        function feedDeleteBtn(index) {
+            alert('调用啦')
+            $.ajax({
+                type: 'POST',
+                url: '/table/feed/delete',
+                data: {
+                    'Feed_index': index
+                },
+                success: function (data) {
+                    $('#table').html(data)
+                    $('#delete-table').css('display','none')
+                },
+                error: function (err) {
+                    console.log(err)
+                    alert("操作失败，请刷新重新尝试！")
+                }
+            })
+        }
+    </script>
+
 </body>
 
 </html>
