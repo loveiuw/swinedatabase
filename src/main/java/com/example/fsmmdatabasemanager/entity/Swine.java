@@ -16,9 +16,9 @@ import lombok.ToString;
 @TableName(value = "swine")
 public class Swine {
     @TableId(value = "swine_index")
-    private int swineIndex;
+    private Integer swineIndex;
 
-    @TableField(value = "swine_tag")
+    @TableField(value = "swine_id")
     private String swineTag;
 
     @TableField(value = "col_id")
@@ -28,7 +28,7 @@ public class Swine {
     private String sex;
 
     @TableField(value = "ages")
-    private int ages;
+    private Integer ages;
 
     @TableField(value = "weights")
     private String weights;

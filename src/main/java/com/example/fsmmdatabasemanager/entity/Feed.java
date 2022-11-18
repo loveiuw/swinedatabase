@@ -19,13 +19,13 @@ import lombok.ToString;
 
 public class Feed {
     @TableId(value = "Feed_index")
-    private int feedIndex;
+    private Integer feedIndex;
 
     @TableField(value = "tag")
     private String tag;
 
     @TableField(value = "time")
-    private int time;
+    private Integer time;
 
     @TableField(value = "Nurseing_feed_percentage")
     private float nurseingFeedPercentage;

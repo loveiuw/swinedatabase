@@ -16,7 +16,7 @@ import lombok.ToString;
 @TableName(value = "times")
 public class Times {
     @TableId(value = "days")
-    private int days;
+    private Integer days;
 
     @TableField(value = "phase")
     private String phase;

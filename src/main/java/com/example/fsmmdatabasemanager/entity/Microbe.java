@@ -16,7 +16,7 @@ import lombok.ToString;
 @TableName(value = "microbe")
 public class Microbe {
     @TableId(value = "microbe_id")
-    private int microbeId;
+    private Integer microbeId;
 
     @TableField(value = "taxonomy")
     private String taxonomy;
@@ -28,7 +28,7 @@ public class Microbe {
     private String col;
 
     @TableField(value = "days")
-    private int days;
+    private Integer days;
 
     @TableField(value = "abundance")
     private float abundance;

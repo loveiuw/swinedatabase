@@ -16,7 +16,7 @@ import lombok.ToString;
 @TableName(value = "admins")
 public class Admins {
     @TableId(value = "admin_id")
-    private int adminId;
+    private Integer adminId;
 
     @TableField(value = "admin_account")
     private String adminAccount;

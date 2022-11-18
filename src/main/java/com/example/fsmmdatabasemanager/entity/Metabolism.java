@@ -16,7 +16,7 @@ import lombok.ToString;
 @TableName(value = "metabolism")
 public class Metabolism {
     @TableId(value = "metabolism_index")
-    private int metabolismInd;
+    private Integer metabolismInd;
 
     @TableField(value = "metabolism_name")
     private String metabolismName;
@@ -36,6 +36,6 @@ public class Metabolism {
     @TableField(value = "identification")
     private String identification;
 
-    @TableField(value = "time")
-    private int time;
+    @TableField(value = "times")
+    private Integer time;
 }
