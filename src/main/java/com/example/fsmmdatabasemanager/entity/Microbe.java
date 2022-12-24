@@ -38,4 +38,12 @@ public class Microbe {
 
     @TableField(value = "P_value_age")
     private float pValueAge;
+
+    @TableField(value = "microbe_dpf_tpf_difference")
+    private Integer DptTpfdifference;
+
+    @TableField(value = "microbe_age_difference")
+    private Integer Agedifference;
+
+
 }

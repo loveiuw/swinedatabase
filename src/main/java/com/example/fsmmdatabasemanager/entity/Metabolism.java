@@ -36,6 +36,11 @@ public class Metabolism {
     @TableField(value = "identification")
     private String identification;
 
-    @TableField(value = "times")
+    @TableField(value = "metabolism_time")
     private Integer time;
+
+    @TableField(value = "metabolome_difference")
+    private Integer metabolismdifference;
+
+
 }
