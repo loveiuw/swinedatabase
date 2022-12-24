@@ -224,6 +224,8 @@
                         <th>abundance</th>
                         <th>P_value_dpf_tpf</th>
                         <th class="text-right">P_value_age</th>
+                        <th>microbe_dpf_tpf_difference</th>
+                        <th>microbe_age_difference</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -236,7 +238,13 @@
                         <td th:text="${microbe?.abundance}">abundance</td>
                         <td th:text="${microbe?.pValueDpfTpf}">P_value_dpf_tpf</td>
                         <td th:text="${microbe?.pValueAge}">P_value_age</td>
-                        <td style="width: 50px;" th:onclick="microbe_updateBtn([[${microbe?.microbeId}]],[[${microbe?.taxonomy}]],[[${microbe?.microbeName}]],[[${microbe?.col}]],[[${microbe?.days}]],[[${microbe?.abundance}]],[[${microbe?.pValueDpfTpf}]],[[${microbe?.pValueAge}]])">
+                        <td th:text="${microbe?.dptTpfdifference}">microbe_dpf_tpf_difference</td>
+                        <td th:text="${microbe?.agedifference}">microbe_age_difference</td>
+
+                        <td style="width: 50px;" th:onclick="microbe_updateBtn([[ ${microbe?.microbeId}]],[[${microbe?.taxonomy}]],
+                        [[${microbe?.microbeName}]],[[${microbe?.col}]],[[${microbe?.days}]],
+                        [[${microbe?.abundance}]],[[${microbe?.pValueDpfTpf}]],[[${microbe?.pValueAge}]],[[${microbe?.dptTpfdifference}]],
+                        [[${microbe?.agedifference}]])">
                             <button @click="editmodalOpen = ! editmodalOpen">
                                 <i class="fa fa-edit"
                                 ></i> 修改
@@ -249,6 +257,7 @@
                         </td>
                     </tr>
                     </tbody>
+
                 </table>
             </div>
         </div>

@@ -80,7 +80,6 @@
                 </li>
 
 
-
                 <li class="relative" x-data="{profile:false}" @click.away="profile=false">
                     <a href="javascript:;"
                        class="sm:px-[10px] md:px-[15px] text-white flex items-center h-[60px] hover:bg-blackOpacity focus:bg-blackOpacity after:media-max-w-md:hidden after:content-['\f107'] after:font-FontAwesome after:pl-[5px] after:text-[20px] after:transition-all after:ease-in-out after:duration-[0.2s]"
@@ -223,7 +222,8 @@
                         <th>VIP</th>
                         <th>Sample</th>
                         <th>identification</th>
-                        <th class="text-right">time</th>
+                        <th class="text-right">metabolism_time</th>
+                        <th>metabolome_difference</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -234,9 +234,13 @@
                         <td th:text="${metabolism?.pValue}">P_value</td>
                         <td th:text="${metabolism?.vip}">VIP</td>
                         <td th:text="${metabolism?.sample}">Sample</td>
-                        <td th:text="${metabolism?.identification}">identification</td>
-                        <td th:text="${metabolism?.time}">time</td>
-                        <td style="width: 50px;" th:onclick="metabolism_updateBtn([[${metabolism?.metabolismInd}]],[[${metabolism?.metabolismName}]],[[${metabolism?.foldChange}]],[[${metabolism?.pValue}]],[[${metabolism?.vip}]],[[${metabolism?.sample}]],[[${metabolism?.identification}]],[[${metabolism?.time}]])">
+                        <td th:text="${metabolism?.identification} "></td>
+                        <td th:text="${metabolism?.time} "></td>
+                        <td th:text="${metabolism?.metabolismdifference}"></td>
+
+                        <td style="width: 50px;" th:onclick="metabolism_updateBtn([[${metabolism?.metabolismInd}]],[[${metabolism?.metabolismName}]],
+                        [[${metabolism?.foldChange}]],[[${metabolism?.pValue}]],[[${metabolism?.vip}]],[[${metabolism?.sample}]],
+                        [[${metabolism?.identification}]],[[${metabolism?.time}]],[[${metabolism?.metabolismdifference}]])">
                             <button @click="editmodalOpen = ! editmodalOpen">
                                 <i class="fa fa-edit"
                                 ></i> 修改
